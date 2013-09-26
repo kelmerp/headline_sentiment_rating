@@ -5,6 +5,7 @@ class ViralHeat
 
   def self.get_sentiment(string)
     raw_response = ViralHeat.sa_helper.review(:text => string)
-    raw_response.parsed_response
+    { "sentiment_description" => raw_response.parsed_response["mood"],
+      "sentiment_score" => raw_response.parsed_response["prob"] }
   end
 end
