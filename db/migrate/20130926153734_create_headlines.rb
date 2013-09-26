@@ -11,6 +11,8 @@ class CreateHeadlines < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :headlines, :sentiment_score, :sentiment_description, :content
+    add_index :headlines, :sentiment_score
+    add_index :headlines, :sentiment_description
+    add_index :headlines, :content
   end
 end
