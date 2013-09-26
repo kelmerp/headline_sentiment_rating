@@ -28,6 +28,8 @@ GEM
     arel (4.0.0)
     atomic (1.1.14)
     builder (3.1.4)
+    childprocess (0.3.9)
+      ffi (~> 1.0, >= 1.0.11)
     coderay (1.0.9)
     coffee-rails (4.0.0)
       coffee-script (>= 2.2.0)
@@ -54,6 +56,10 @@ GEM
     guard-rspec (3.0.2)
       guard (>= 1.8)
       rspec (~> 2.13)
+    guard-spork (1.5.1)
+      childprocess (>= 0.2.3)
+      guard (>= 1.1)
+      spork (>= 0.8.4)
     hike (1.2.3)
     i18n (0.6.5)
     jbuilder (1.5.1)
@@ -165,6 +171,7 @@ PLATFORMS
 DEPENDENCIES
   coffee-rails (~> 4.0.0)
   guard-rspec
+  guard-spork
   jbuilder (~> 1.2)
   jquery-rails
   pg

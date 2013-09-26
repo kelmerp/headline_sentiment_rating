@@ -39,6 +39,7 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'spork', '~> 1.0rc'
   gem 'guard-rspec'
+  gem 'guard-spork'
 end
 
 
