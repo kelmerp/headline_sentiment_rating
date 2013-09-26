@@ -9,6 +9,11 @@ require "sprockets/railtie"
 
 require 'wayback'
 
+require 'alchemy_api'  #internet api call
+require 'sentiment_analysis'  #internet api call
+require 'sentimental'  #runs locally
+require 'sentimentalizer'  #runs locally
+
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env)
@@ -26,5 +31,11 @@ module HeadlineAnalysis
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
+    config.before_configuration do
+      env_file = File.join(Rails.root, 'config', 'api_keys.yml')
+      YAML.load(File.open(env_file)).each do |key, value|
+        ENV[key.to_s] = value
+      end if File.exists?(env_file)
+    end
   end
 end

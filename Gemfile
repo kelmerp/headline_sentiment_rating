@@ -29,6 +29,11 @@ gem 'jbuilder', '~> 1.2'
 
 gem 'wayback'
 
+gem 'alchemy-api-rb', :require => 'alchemy_api'
+gem 'sentiment_analysis'
+gem 'sentimental'
+gem 'sentimentalizer'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
