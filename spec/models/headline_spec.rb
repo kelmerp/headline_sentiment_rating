@@ -14,5 +14,7 @@ describe Headline do
     should validate_presence_of(:archive_url)
   end
 
-
+  it "should belong to source" do
+    should belong_to(:source)
+  end
 end
