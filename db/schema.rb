@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130926153734) do
+ActiveRecord::Schema.define(version: 20130926225328) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20130926153734) do
     t.integer  "source_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "sentiment_engine"
   end
 
   add_index "headlines", ["content"], name: "index_headlines_on_content", using: :btree

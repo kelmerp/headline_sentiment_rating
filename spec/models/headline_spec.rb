@@ -14,6 +14,11 @@ describe Headline do
     should validate_presence_of(:archive_url)
   end
 
+  it "validates the presence of an sentiment engine" do
+    should ensure_inclusion_of(:sentiment_engine).in_array(%w(Alchemy ViralHeat
+                                                  Sentimental Sentimentalizer))
+  end
+
   it "should belong to source" do
     should belong_to(:source)
   end
