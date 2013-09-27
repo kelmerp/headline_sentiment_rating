@@ -26,7 +26,7 @@ def write_csv(timestamp, internal_array, headlines)
   archive_url = internal_array.last.first.last[:uri]
 
   headlines.each do |headline|
-    CSV.open('headline.csv', "ab") do |csv|
+    CSV.open('cnn_headlines/headline.csv', "ab") do |csv|
       csv << [@url, archive_url, timestamp, headline]
     end
   end
@@ -35,7 +35,7 @@ end
 
 # Groups list by days
 new_hash = list_array.group_by{ |k,v| k.to_s[0,8] }
-new_hash = new_hash.delete_if { |k| k.to_i >= 20100529 }
+new_hash = new_hash.delete_if { |k| k.to_i >= 20090311 }
 
 
 #iterates through list and grabs one homepage per day
@@ -53,12 +53,13 @@ new_hash.to_a.each do |internal_array|
     headlines = parse_page(page.html)
     p headlines
   rescue
+    p $!.message
     next
   end
 
   write_csv(timestamp, internal_array, headlines)
 
-  sleep 0.8
+  sleep 0.5
 end
 
 
