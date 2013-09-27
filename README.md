@@ -14,6 +14,7 @@
 
 ---
 ###Wayback Scraper Script
+- This is the script to search through the given URL to scrape headlines
 - This script can be found in App/wayback_scrapper
 - script_v1.rb drives the code for the script
 - This script writes its results to a CSV file
