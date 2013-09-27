@@ -6,12 +6,12 @@ require_relative "hash.rb"
 require_relative "noko_it_up.rb"
 
 
-@url = 'http://www.cnn.com'
+@url = 'http://www.foxnews.com'
 # Wayback.page(url, '20130820174405')
 # Commented out wayback calls because we stored results
 # In a seperate file
 # hash = Wayback.list('http://www.cnn.com')
-list = Wayback.list('http://www.cnn.com')
+list = Wayback.list(@url)
 list_array = list.attrs[:dates].to_a.reverse
 # hash = Wayback.list('http://www.msnbc.com')
 
@@ -26,7 +26,7 @@ def write_csv(timestamp, internal_array, headlines)
   archive_url = internal_array.last.first.last[:uri]
 
   headlines.each do |headline|
-    CSV.open('cnn_headlines/headline.csv', "ab") do |csv|
+    CSV.open('fox_headlines/headline.csv', "ab") do |csv|
       csv << [@url, archive_url, timestamp, headline]
     end
   end
@@ -35,7 +35,7 @@ end
 
 # Groups list by days
 new_hash = list_array.group_by{ |k,v| k.to_s[0,8] }
-new_hash = new_hash.delete_if { |k| k.to_i >= 20090311 }
+new_hash = new_hash.delete_if { |k| k.to_i >= 20090823 }
 
 
 #iterates through list and grabs one homepage per day
@@ -52,6 +52,7 @@ new_hash.to_a.each do |internal_array|
     page = Wayback.page(@url, timestamp)
     headlines = parse_page(page.html)
     p headlines
+    puts "############################################################################"
   rescue
     p $!.message
     next
