@@ -3,6 +3,7 @@ class Headline < ActiveRecord::Base
   validates :content, length: { maximum: 255}
   validates :date, presence: true
   validates :archive_url, presence: true
+  validates :sentiment_score, presence: true
   validates :sentiment_engine, :inclusion => { :in => %w(Alchemy ViralHeat
                                                   Sentimental Sentimentalizer)}
   def self.date(some_date)
