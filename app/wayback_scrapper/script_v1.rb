@@ -6,7 +6,7 @@ require_relative "hash.rb"
 require_relative "noko_it_up.rb"
 
 
-@url = 'http://www.foxnews.com'
+@url = 'http://www.msnbc.com'
 # Wayback.page(url, '20130820174405')
 # Commented out wayback calls because we stored results
 # In a seperate file
@@ -26,7 +26,7 @@ def write_csv(timestamp, internal_array, headlines)
   archive_url = internal_array.last.first.last[:uri]
 
   headlines.each do |headline|
-    CSV.open('fox_headlines/headline.csv', "ab") do |csv|
+    CSV.open('msnbc_headlines/headline.csv', "ab") do |csv|
       csv << [@url, archive_url, timestamp, headline]
     end
   end
@@ -35,7 +35,7 @@ end
 
 # Groups list by days
 new_hash = list_array.group_by{ |k,v| k.to_s[0,8] }
-new_hash = new_hash.delete_if { |k| k.to_i >= 20090823 }
+new_hash = new_hash.delete_if { |k| k.to_i >= 20120701 }
 
 
 #iterates through list and grabs one homepage per day
