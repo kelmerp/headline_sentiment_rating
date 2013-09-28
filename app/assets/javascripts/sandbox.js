@@ -34,7 +34,7 @@ $(document).ready(function() {
     .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-  d3.tsv("data.tsv", function(error, data) {
+  d3.json("/data", function(error, data) {
     color.domain(d3.keys(data[0]).filter(function(key) { return key !== "date"; }));
 
     data.forEach(function(d) {
@@ -69,7 +69,7 @@ $(document).ready(function() {
         .call(yAxis)
       .append("text")
         .attr("transform", "rotate(-90)")
-        // .attr("y", 6)
+        .attr("y", 6)
         .attr("dy", "2em")
         .style("text-anchor", "end")
         .text("Temperature (ºF)");
