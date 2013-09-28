@@ -9,7 +9,7 @@ open_black_list()
 # add_to_black_list(@black_list)
 
 # @url = 'http://news.bbc.co.uk'
-@url = "http://www.news.yahoo.com/"
+@url = "http://www.cnn.com/politics"
 # Wayback.page(url, '20130820174405')
 # Commented out wayback calls because we stored results
 # In a seperate file
@@ -29,7 +29,7 @@ def write_csv(timestamp, one_scrape, headlines)
   archive_url = one_scrape.last[:uri]
 
   headlines.each do |headline|
-    CSV.open('yahoo_news/headline.csv', "ab") do |csv|
+    CSV.open('cnn_politics_headlines/headline.csv', "ab") do |csv|
       csv << [@url, archive_url, timestamp, headline.gsub("\n"," ").strip]
     end
   end
@@ -38,12 +38,12 @@ end
 
 # Groups list by days
 new_hash = list_array.group_by{ |k,v| k.to_s[0,8] }
-new_hash = new_hash.delete_if { |k| k.to_i >= 20080424 }
+new_hash = new_hash.delete_if { |k| k.to_i >= 20110814 }
 
 #iterates through list and grabs one homepage per day
 new_hash.to_a.each do |internal_array|
 
-  return false if i >= 150
+  return false if i >= 365
   i += 1
 
   p i
@@ -65,9 +65,9 @@ new_hash.to_a.each do |internal_array|
     one_scrape = scrapes_in_one_day.shift
     retry
   end
-  write_csv(timestamp, one_scrape, headlines)
+  # write_csv(timestamp, one_scrape, headlines)
 
-  sleep 0.25
+  sleep 1
 end
 
 # open_black_list()
