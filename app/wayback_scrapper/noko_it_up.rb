@@ -33,7 +33,6 @@ def parse_page(raw_html)
 
   @cleaned_headlines
 
-
 end
 
 
@@ -43,9 +42,14 @@ def parse(a_tags)
   return if a_tags.length <= 0
 
   span_tags = a_tags.css("span")
+  p_tags =  a_tags.css("p")
+
   if !(span_tags.empty?)
     clean_data(span_tags)
+  # elsif !(p_tags.empty?)
+  #   clean_data(p_tags)
   end
+
   clean_data(a_tags)
 
   @cleaned_headlines if @cleaned_headlines.length > 0
@@ -61,6 +65,9 @@ def clean_data(tags)
     next if cleaned_tag.length < 15
     next if @black_list.include?(cleaned_tag)
     next if cleaned_tag.include?("AP Photo")
+    next if cleaned_tag.include?("http")
+    next if cleaned_tag.include?("//")
+
     return array if @cleaned_headlines.length >= 20
     @cleaned_headlines << cleaned_tag
   end
@@ -93,7 +100,7 @@ end
 
 
 
-# @black_list = 
+# @black_list =
 # [""," ", "LIVE TV","CNN TV", "HLN TV", "Markets", "My quotes", "Indexes", "Dow", "Nasdaq", "S&P", "Get Quotes", "CNNMoney.com", "NEW: My Portfolio", "U.S.", "World", "Politics", "Tech", "Business", "Entertainment", "Travel", "Living", "Health", "Photography", "Sports", "HLNtv.com", "TIME.com", "Indeed.com Job Search", "Play CNN Games!", "TV & Video", "HLN", "Full Schedule", " The Lead4pm ET / 1pm PT on CNN", "The Situation Room5pm ET / 2pm PT on CNN", " Erin Burnett: OutFront7pm ET / 4pm PT on CNN",
 # " AC 3608pm ET / 5pm PT on CNN", " Piers Morgan Live9pm ET / PT on CNN","View Collections","Home","Video","CNN Trends",
 # "U.S.",
