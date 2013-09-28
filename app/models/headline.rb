@@ -1,6 +1,7 @@
 class Headline < ActiveRecord::Base
   belongs_to :source
-  validates :content, length: { maximum: 255}
+  validates :content, length: { in: 15..255},
+            uniqueness: true
   validates :date, presence: true
   validates :archive_url, presence: true
   validates :sentiment_score, presence: true
