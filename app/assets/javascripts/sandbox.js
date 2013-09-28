@@ -5,7 +5,7 @@ $(document).ready(function() {
       width = 960 - margin.left - margin.right,
       height = 500 - margin.top - margin.bottom;
 
-  var parseDate = d3.time.format("%Y%m%d").parse;
+  var parseDate = d3.time.format.utc("%Y-%m-%dT%H:%M:%S.%LZ").parse;
 
   var x = d3.time.scale()
       .range([0, width]);
@@ -23,10 +23,10 @@ $(document).ready(function() {
       .scale(y)
       .orient("left");
 
-  var line = d3.svg.line()
-      .interpolate("basis")
-      .x(function(d) { return x(d.date); })
-      .y(function(d) { return y(d.temperature); });
+  // var line = d3.svg.line()
+  //     .interpolate("basis")
+  //     .x(function(d) { return x(d.date); })
+  //     .y(function(d) { return y(d.temperature); });
 
   var svg = d3.select("body").append("svg")
       .attr("width", width + margin.left + margin.right)
@@ -34,11 +34,13 @@ $(document).ready(function() {
     .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-  d3.json("/data", function(error, data) {
-    color.domain(d3.keys(data[0]).filter(function(key) { return key !== "date"; }));
 
+  d3.json("/cnn", function(error, data) {
+    console.log(data);
+    console.log(error);
+    color.domain(d3.keys(data[0]).filter(function(key) { return key !== "date"; }));
     data.forEach(function(d) {
-      console.log(d)
+      // console.log(d)
       d.date = parseDate(d.date);
     });
 
@@ -62,7 +64,7 @@ $(document).ready(function() {
         .attr("class", "x axis")
         .attr("transform", "translate(0," + height + ")")
         .call(xAxis);
-      debugger;
+      // debugger;
 
     svg.append("g")
         .attr("class", "y axis")
@@ -73,25 +75,51 @@ $(document).ready(function() {
         .attr("dy", "2em")
         .style("text-anchor", "end")
         .text("Temperature (ºF)");
-      debugger;
+      // debugger;
+
+    svg.selectAll("circle")
+       .data(data)
+       .enter()
+       .append("circle")
+      .attr("cx", function(d) {
+        console.log(d.date);
+        console.log(typeof String(d.date));
+
+        return x(-parseDate(String(d.date)));
+      })
+      .attr("cy", function(d) {
+        console.log(d.cnn)
+        return y(d.cnn);
+      })
+      .attr("r", 5);
 
     var city = svg.selectAll(".city")
         .data(cities)
       .enter().append("g")
         .attr("class", "city");
-      debugger;
+      // debugger;
 
-    city.append("path")
-        .attr("class", "line")
-        .attr("d", function(d) { return line(d.values); })
-        .style("stroke", function(d) { return color(d.name); });
-      debugger;
+    // city.append("path")
+    //     .attr("class", "line")
+    //     .attr("d", function(d) { return line(d.values); })
+    //     .style("stroke", function(d) { return color(d.name); });
+      // debugger;
 
-    city.append("text")
-        .datum(function(d) { return {name: d.name, value: d.values[d.values.length - 1]}; })
-        .attr("transform", function(d) { return "translate(" + x(d.value.date) + "," + y(d.value.temperature) + ")"; })
-        .attr("x", 3)
-        .attr("dy", ".35em")
-        .text(function(d) { return d.name; });
+  // var totalLength = path.node().getTotalLength();
+  //   path
+  //   .attr("stroke-dasharray", totalLength + " " + totalLength)
+  //   .attr("stroke-dashoffset", totalLength)
+  //   .transition()
+  //     .duration(5000)
+  //     .ease('linear')
+  //     .attr("stroke-dashoffset", 0);
+
+
+  //   city.append("text")
+  //       .datum(function(d) { return {name: d.name, value: d.values[d.values.length - 1]}; })
+  //       .attr("transform", function(d) { return "translate(" + x(d.value.date) + "," + y(d.value.temperature) + ")"; })
+  //       .attr("x", 3)
+  //       .attr("dy", ".35em")
+  //       .text(function(d) { return d.name; });
   });
 });
