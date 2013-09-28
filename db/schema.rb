@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130926225328) do
+ActiveRecord::Schema.define(version: 20130927235145) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,11 @@ ActiveRecord::Schema.define(version: 20130926225328) do
   add_index "headlines", ["content"], name: "index_headlines_on_content", using: :btree
   add_index "headlines", ["sentiment_description"], name: "index_headlines_on_sentiment_description", using: :btree
   add_index "headlines", ["sentiment_score"], name: "index_headlines_on_sentiment_score", using: :btree
+
+  create_table "sandboxes", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "sources", force: true do |t|
     t.string   "name"

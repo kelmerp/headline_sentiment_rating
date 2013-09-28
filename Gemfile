@@ -29,6 +29,8 @@ gem 'jbuilder', '~> 1.2'
 
 gem 'wayback'
 
+gem 'd3-rails'
+
 gem 'alchemy-api-rb', :require => 'alchemy_api'
 gem 'sentiment_analysis'
 gem 'sentimental'

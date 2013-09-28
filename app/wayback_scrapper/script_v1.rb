@@ -5,8 +5,11 @@ require 'pp'
 require_relative "hash.rb"
 require_relative "noko_it_up.rb"
 
+open_black_list()
+# add_to_black_list(@black_list)
 
-@url = 'http://www.msnbc.com'
+# @url = 'http://news.bbc.co.uk'
+@url = "http://www.news.yahoo.com/"
 # Wayback.page(url, '20130820174405')
 # Commented out wayback calls because we stored results
 # In a seperate file
@@ -21,13 +24,13 @@ list_array = list.attrs[:dates].to_a.reverse
 i = 0
 
 
-def write_csv(timestamp, internal_array, headlines)
 
-  archive_url = internal_array.last.first.last[:uri]
+def write_csv(timestamp, one_scrape, headlines)
+  archive_url = one_scrape.last[:uri]
 
   headlines.each do |headline|
-    CSV.open('msnbc_headlines/headline.csv', "ab") do |csv|
-      csv << [@url, archive_url, timestamp, headline]
+    CSV.open('yahoo_news/headline.csv', "ab") do |csv|
+      csv << [@url, archive_url, timestamp, headline.gsub("\n"," ").strip]
     end
   end
 
@@ -35,34 +38,40 @@ end
 
 # Groups list by days
 new_hash = list_array.group_by{ |k,v| k.to_s[0,8] }
-new_hash = new_hash.delete_if { |k| k.to_i >= 20120701 }
-
+new_hash = new_hash.delete_if { |k| k.to_i >= 20080424 }
 
 #iterates through list and grabs one homepage per day
 new_hash.to_a.each do |internal_array|
 
-  return false if i >= 365
+  return false if i >= 150
   i += 1
 
   p i
-
+  # p internal_array
   p internal_array.last.first.last[:datetime]
-  timestamp = internal_array.last.first[0]
+  scrapes_in_one_day ||= internal_array.last
+  one_scrape = scrapes_in_one_day.shift
+
   begin
+    timestamp = one_scrape[0]
     page = Wayback.page(@url, timestamp)
     headlines = parse_page(page.html)
+    raise "A page loaded but no headlines found" if headlines.empty?
     p headlines
     puts "############################################################################"
   rescue
     p $!.message
-    next
+    next if scrapes_in_one_day.empty?
+    one_scrape = scrapes_in_one_day.shift
+    retry
   end
+  write_csv(timestamp, one_scrape, headlines)
 
-  write_csv(timestamp, internal_array, headlines)
-
-  sleep 0.5
+  sleep 0.25
 end
 
+# open_black_list()
+# add_to_black_list(@black_list)
 
 
 
