@@ -11,40 +11,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130929145727) do
+ActiveRecord::Schema.define(version: 20130929212636) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "daily_averages", force: true do |t|
-    t.date     "date"
-    t.float    "average_score"
-    t.integer  "source_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "headlines", force: true do |t|
     t.datetime "date"
     t.string   "content"
-    t.decimal  "sentiment_score"
-    t.string   "sentiment_description"
     t.string   "archive_url"
     t.integer  "source_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "sentiment_engine"
   end
 
   add_index "headlines", ["content"], name: "index_headlines_on_content", using: :btree
   add_index "headlines", ["date"], name: "index_headlines_on_date", using: :btree
-  add_index "headlines", ["sentiment_description"], name: "index_headlines_on_sentiment_description", using: :btree
-  add_index "headlines", ["sentiment_score"], name: "index_headlines_on_sentiment_score", using: :btree
 
   create_table "sandboxes", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "sentiment_data", force: true do |t|
+    t.decimal  "sentiment_score"
+    t.string   "sentiment_description"
+    t.string   "sentiment_engine"
+    t.integer  "headline_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sentiment_data", ["sentiment_description"], name: "index_sentiment_data_on_sentiment_description", using: :btree
+  add_index "sentiment_data", ["sentiment_engine"], name: "index_sentiment_data_on_sentiment_engine", using: :btree
+  add_index "sentiment_data", ["sentiment_score"], name: "index_sentiment_data_on_sentiment_score", using: :btree
 
   create_table "sources", force: true do |t|
     t.string   "name"
