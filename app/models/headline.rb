@@ -1,5 +1,5 @@
 class Headline < ActiveRecord::Base
-  has_many :sentiment_data
+  has_many :sentiment_data, -> { distinct }
   belongs_to :source
   validates :content, length: { in: 15..255},
             uniqueness: true
