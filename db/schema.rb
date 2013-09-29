@@ -19,19 +19,14 @@ ActiveRecord::Schema.define(version: 20130929180737) do
   create_table "headlines", force: true do |t|
     t.datetime "date"
     t.string   "content"
-    t.decimal  "sentiment_score"
-    t.string   "sentiment_description"
     t.string   "archive_url"
     t.integer  "source_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "sentiment_engine"
   end
 
   add_index "headlines", ["content"], name: "index_headlines_on_content", using: :btree
   add_index "headlines", ["date"], name: "index_headlines_on_date", using: :btree
-  add_index "headlines", ["sentiment_description"], name: "index_headlines_on_sentiment_description", using: :btree
-  add_index "headlines", ["sentiment_score"], name: "index_headlines_on_sentiment_score", using: :btree
 
   create_table "sandboxes", force: true do |t|
     t.datetime "created_at"
