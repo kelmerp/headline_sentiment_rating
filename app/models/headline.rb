@@ -1,12 +1,11 @@
 class Headline < ActiveRecord::Base
+  has_many :sentiment_data, -> { distinct }
   belongs_to :source
   validates :content, length: { in: 15..255},
             uniqueness: true
   validates :date, presence: true
   validates :archive_url, presence: true
-  validates :sentiment_score, presence: true
-  validates :sentiment_engine, :inclusion => { :in => %w(Alchemy ViralHeat
-                                                  Sentimental Sentimentalizer)}
+
   def self.date(some_date)
     search_date = DateTime.parse(some_date.to_s)
     date_range = search_date.beginning_of_day...search_date.end_of_day

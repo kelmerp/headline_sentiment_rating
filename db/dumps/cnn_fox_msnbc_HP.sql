@@ -9,14 +9,14 @@ SET check_function_bodies = false;
 SET client_min_messages = warning;
 
 --
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner:
 --
 
 CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner:
 --
 
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
@@ -28,45 +28,9 @@ SET default_tablespace = '';
 
 SET default_with_oids = false;
 
---
--- Name: daily_averages; Type: TABLE; Schema: public; Owner: martaperez; Tablespace: 
---
-
-CREATE TABLE daily_averages (
-    id integer NOT NULL,
-    date date,
-    average_score double precision,
-    source_id integer,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
-ALTER TABLE public.daily_averages OWNER TO martaperez;
 
 --
--- Name: daily_averages_id_seq; Type: SEQUENCE; Schema: public; Owner: martaperez
---
-
-CREATE SEQUENCE daily_averages_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.daily_averages_id_seq OWNER TO martaperez;
-
---
--- Name: daily_averages_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: martaperez
---
-
-ALTER SEQUENCE daily_averages_id_seq OWNED BY daily_averages.id;
-
-
---
--- Name: headlines; Type: TABLE; Schema: public; Owner: martaperez; Tablespace: 
+-- Name: headlines; Type: TABLE; Schema: public; Owner: ; Tablespace:
 --
 
 CREATE TABLE headlines (
@@ -83,10 +47,9 @@ CREATE TABLE headlines (
 );
 
 
-ALTER TABLE public.headlines OWNER TO martaperez;
 
 --
--- Name: headlines_id_seq; Type: SEQUENCE; Schema: public; Owner: martaperez
+-- Name: headlines_id_seq; Type: SEQUENCE; Schema: public; Owner:
 --
 
 CREATE SEQUENCE headlines_id_seq
@@ -97,17 +60,16 @@ CREATE SEQUENCE headlines_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.headlines_id_seq OWNER TO martaperez;
 
 --
--- Name: headlines_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: martaperez
+-- Name: headlines_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner:
 --
 
 ALTER SEQUENCE headlines_id_seq OWNED BY headlines.id;
 
 
 --
--- Name: sandboxes; Type: TABLE; Schema: public; Owner: martaperez; Tablespace: 
+-- Name: sandboxes; Type: TABLE; Schema: public; Owner: ; Tablespace:
 --
 
 CREATE TABLE sandboxes (
@@ -116,11 +78,8 @@ CREATE TABLE sandboxes (
     updated_at timestamp without time zone
 );
 
-
-ALTER TABLE public.sandboxes OWNER TO martaperez;
-
 --
--- Name: sandboxes_id_seq; Type: SEQUENCE; Schema: public; Owner: martaperez
+-- Name: sandboxes_id_seq; Type: SEQUENCE; Schema: public; Owner:
 --
 
 CREATE SEQUENCE sandboxes_id_seq
@@ -131,28 +90,23 @@ CREATE SEQUENCE sandboxes_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.sandboxes_id_seq OWNER TO martaperez;
-
 --
--- Name: sandboxes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: martaperez
+-- Name: sandboxes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner:
 --
 
 ALTER SEQUENCE sandboxes_id_seq OWNED BY sandboxes.id;
 
 
 --
--- Name: schema_migrations; Type: TABLE; Schema: public; Owner: martaperez; Tablespace: 
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: martaperez; Tablespace:
 --
 
 CREATE TABLE schema_migrations (
     version character varying(255) NOT NULL
 );
 
-
-ALTER TABLE public.schema_migrations OWNER TO martaperez;
-
 --
--- Name: sources; Type: TABLE; Schema: public; Owner: martaperez; Tablespace: 
+-- Name: sources; Type: TABLE; Schema: public; Owner: ; Tablespace:
 --
 
 CREATE TABLE sources (
@@ -162,11 +116,8 @@ CREATE TABLE sources (
     updated_at timestamp without time zone
 );
 
-
-ALTER TABLE public.sources OWNER TO martaperez;
-
 --
--- Name: sources_id_seq; Type: SEQUENCE; Schema: public; Owner: martaperez
+-- Name: sources_id_seq; Type: SEQUENCE; Schema: public; Owner:
 --
 
 CREATE SEQUENCE sources_id_seq
@@ -176,62 +127,40 @@ CREATE SEQUENCE sources_id_seq
     NO MAXVALUE
     CACHE 1;
 
-
-ALTER TABLE public.sources_id_seq OWNER TO martaperez;
-
 --
--- Name: sources_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: martaperez
+-- Name: sources_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner:
 --
 
 ALTER SEQUENCE sources_id_seq OWNED BY sources.id;
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: martaperez
+-- Name: id; Type: DEFAULT; Schema: public; Owner:
 --
 
-ALTER TABLE ONLY daily_averages ALTER COLUMN id SET DEFAULT nextval('daily_averages_id_seq'::regclass);
-
-
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: martaperez
+-- Name: id; Type: DEFAULT; Schema: public; Owner:
 --
 
 ALTER TABLE ONLY headlines ALTER COLUMN id SET DEFAULT nextval('headlines_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: martaperez
+-- Name: id; Type: DEFAULT; Schema: public; Owner:
 --
 
 ALTER TABLE ONLY sandboxes ALTER COLUMN id SET DEFAULT nextval('sandboxes_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: martaperez
+-- Name: id; Type: DEFAULT; Schema: public; Owner:
 --
 
 ALTER TABLE ONLY sources ALTER COLUMN id SET DEFAULT nextval('sources_id_seq'::regclass);
 
 
 --
--- Data for Name: daily_averages; Type: TABLE DATA; Schema: public; Owner: martaperez
---
-
-COPY daily_averages (id, date, average_score, source_id, created_at, updated_at) FROM stdin;
-1	2013-09-27	\N	1	2013-09-27 18:36:14.338949	2013-09-27 18:43:11.881872
-\.
-
-
---
--- Name: daily_averages_id_seq; Type: SEQUENCE SET; Schema: public; Owner: martaperez
---
-
-SELECT pg_catalog.setval('daily_averages_id_seq', 1, true);
-
-
---
--- Data for Name: headlines; Type: TABLE DATA; Schema: public; Owner: martaperez
+-- Data for Name: headlines; Type: TABLE DATA; Schema: public; Owner:
 --
 
 COPY headlines (id, date, content, sentiment_score, sentiment_description, archive_url, source_id, created_at, updated_at, sentiment_engine) FROM stdin;
@@ -84672,14 +84601,14 @@ COPY headlines (id, date, content, sentiment_score, sentiment_description, archi
 
 
 --
--- Name: headlines_id_seq; Type: SEQUENCE SET; Schema: public; Owner: martaperez
+-- Name: headlines_id_seq; Type: SEQUENCE SET; Schema: public; Owner:
 --
 
 SELECT pg_catalog.setval('headlines_id_seq', 86360, true);
 
 
 --
--- Data for Name: sandboxes; Type: TABLE DATA; Schema: public; Owner: martaperez
+-- Data for Name: sandboxes; Type: TABLE DATA; Schema: public; Owner:
 --
 
 COPY sandboxes (id, created_at, updated_at) FROM stdin;
@@ -84687,14 +84616,14 @@ COPY sandboxes (id, created_at, updated_at) FROM stdin;
 
 
 --
--- Name: sandboxes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: martaperez
+-- Name: sandboxes_id_seq; Type: SEQUENCE SET; Schema: public; Owner:
 --
 
 SELECT pg_catalog.setval('sandboxes_id_seq', 1, false);
 
 
 --
--- Data for Name: schema_migrations; Type: TABLE DATA; Schema: public; Owner: martaperez
+-- Data for Name: schema_migrations; Type: TABLE DATA; Schema: public; Owner:
 --
 
 COPY schema_migrations (version) FROM stdin;
@@ -84708,7 +84637,7 @@ COPY schema_migrations (version) FROM stdin;
 
 
 --
--- Data for Name: sources; Type: TABLE DATA; Schema: public; Owner: martaperez
+-- Data for Name: sources; Type: TABLE DATA; Schema: public; Owner:
 --
 
 COPY sources (id, name, created_at, updated_at) FROM stdin;
@@ -84720,22 +84649,14 @@ COPY sources (id, name, created_at, updated_at) FROM stdin;
 
 
 --
--- Name: sources_id_seq; Type: SEQUENCE SET; Schema: public; Owner: martaperez
+-- Name: sources_id_seq; Type: SEQUENCE SET; Schema: public; Owner:
 --
 
 SELECT pg_catalog.setval('sources_id_seq', 5, true);
 
 
 --
--- Name: daily_averages_pkey; Type: CONSTRAINT; Schema: public; Owner: martaperez; Tablespace: 
---
-
-ALTER TABLE ONLY daily_averages
-    ADD CONSTRAINT daily_averages_pkey PRIMARY KEY (id);
-
-
---
--- Name: headlines_pkey; Type: CONSTRAINT; Schema: public; Owner: martaperez; Tablespace: 
+-- Name: headlines_pkey; Type: CONSTRAINT; Schema: public; Owner: ; Tablespace:
 --
 
 ALTER TABLE ONLY headlines
@@ -84743,7 +84664,7 @@ ALTER TABLE ONLY headlines
 
 
 --
--- Name: sandboxes_pkey; Type: CONSTRAINT; Schema: public; Owner: martaperez; Tablespace: 
+-- Name: sandboxes_pkey; Type: CONSTRAINT; Schema: public; Owner: ; Tablespace:
 --
 
 ALTER TABLE ONLY sandboxes
@@ -84751,7 +84672,7 @@ ALTER TABLE ONLY sandboxes
 
 
 --
--- Name: sources_pkey; Type: CONSTRAINT; Schema: public; Owner: martaperez; Tablespace: 
+-- Name: sources_pkey; Type: CONSTRAINT; Schema: public; Owner: ; Tablespace:
 --
 
 ALTER TABLE ONLY sources
@@ -84759,47 +84680,45 @@ ALTER TABLE ONLY sources
 
 
 --
--- Name: index_headlines_on_content; Type: INDEX; Schema: public; Owner: martaperez; Tablespace: 
+-- Name: index_headlines_on_content; Type: INDEX; Schema: public; Owner: ; Tablespace:
 --
 
 CREATE INDEX index_headlines_on_content ON headlines USING btree (content);
 
 
 --
--- Name: index_headlines_on_date; Type: INDEX; Schema: public; Owner: martaperez; Tablespace: 
+-- Name: index_headlines_on_date; Type: INDEX; Schema: public; Owner: ; Tablespace:
 --
 
 CREATE INDEX index_headlines_on_date ON headlines USING btree (date);
 
 
 --
--- Name: index_headlines_on_sentiment_description; Type: INDEX; Schema: public; Owner: martaperez; Tablespace: 
+-- Name: index_headlines_on_sentiment_description; Type: INDEX; Schema: public; Owner: ; Tablespace:
 --
 
 CREATE INDEX index_headlines_on_sentiment_description ON headlines USING btree (sentiment_description);
 
 
 --
--- Name: index_headlines_on_sentiment_score; Type: INDEX; Schema: public; Owner: martaperez; Tablespace: 
+-- Name: index_headlines_on_sentiment_score; Type: INDEX; Schema: public; Owner: ; Tablespace:
 --
 
 CREATE INDEX index_headlines_on_sentiment_score ON headlines USING btree (sentiment_score);
 
 
 --
--- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: martaperez; Tablespace: 
+-- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: ; Tablespace:
 --
 
 CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
 
 
 --
--- Name: public; Type: ACL; Schema: -; Owner: martaperez
+-- Name: public; Type: ACL; Schema: -; Owner:
 --
 
 REVOKE ALL ON SCHEMA public FROM PUBLIC;
-REVOKE ALL ON SCHEMA public FROM martaperez;
-GRANT ALL ON SCHEMA public TO martaperez;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
