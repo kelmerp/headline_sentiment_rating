@@ -5,7 +5,7 @@ body {
 .axis path,
 .axis line {
   fill: none;
-  stroke: #000;
+  stroke: green;
   shape-rendering: crispEdges;
 }
 
@@ -17,4 +17,12 @@ body {
   fill: none;
   stroke: steelblue;
   stroke-width: 1.5px;
+}
+
+.cnn{
+  fill: blue;
+}
+
+.fox{
+  fill: red;
 }
