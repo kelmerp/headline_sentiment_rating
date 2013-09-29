@@ -6,13 +6,23 @@ class Headline < ActiveRecord::Base
   validates :date, presence: true
   validates :archive_url, presence: true
 
-  def self.date(some_date)
+  def self.date(some_date) # returns all of the headlines that match that date
     search_date = DateTime.parse(some_date.to_s)
     date_range = search_date.beginning_of_day...search_date.end_of_day
     self.where(date: date_range)
   end
 
   def self.get_average(some_date)
-    self.date(some_date).average(:sentiment_score)
+    hdays = self.date(some_date)
+
+    score = 0
+
+    hdays.each do |day|
+      day.sentiment_data.each do |data|
+        score += data.sentiment_score
+      end
+    end
+
+    score/hdays.count
   end
 end
