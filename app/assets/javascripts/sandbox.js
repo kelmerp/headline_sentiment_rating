@@ -1,125 +1,135 @@
-$(document).ready(function() {
-  console.log("ran");
+sources = ["fox", "cnn"]
 
-  var margin = {top: 20, right: 80, bottom: 30, left: 50},
-      width = 960 - margin.left - margin.right,
-      height = 500 - margin.top - margin.bottom;
+function BlankGraph () {
 
-  var parseDate = d3.time.format.utc("%Y-%m-%dT%H:%M:%S.%LZ").parse;
+  w = 1200
+  h = 450
 
-  var x = d3.time.scale()
-      .range([0, width]);
-
-  var y = d3.scale.linear()
-      .range([height, 0]);
-
-  var color = d3.scale.category10();
-
-  var xAxis = d3.svg.axis()
-      .scale(x)
-      .orient("bottom");
-
-  var yAxis = d3.svg.axis()
-      .scale(y)
-      .orient("left");
-
-  // var line = d3.svg.line()
-  //     .interpolate("basis")
-  //     .x(function(d) { return x(d.date); })
-  //     .y(function(d) { return y(d.temperature); });
-
-  var svg = d3.select("body").append("svg")
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+  svg = d3.select("body")
+              .append('svg')
+              .attr("width", w)
+              .attr("height", h);
 
 
-  d3.json("/cnn", function(error, data) {
-    console.log(data);
-    console.log(error);
-    color.domain(d3.keys(data[0]).filter(function(key) { return key !== "date"; }));
-    data.forEach(function(d) {
-      // console.log(d)
-      d.date = parseDate(d.date);
-    });
+  xScale = d3.scale.linear()
+      .domain([1164931200, 1380153600])
+     .range([0,w]);
 
-    var cities = color.domain().map(function(name) {
-      return {
-        name: name,
-        values: data.map(function(d) {
-          return {date: d.date, temperature: +d[name]};
-        })
-      };
-    });
-
-    x.domain(d3.extent(data, function(d) { return d.date; }));
-
-    y.domain([
-      d3.min(cities, function(c) { return d3.min(c.values, function(v) { return v.temperature; }); }),
-      d3.max(cities, function(c) { return d3.max(c.values, function(v) { return v.temperature; }); })
-    ]);
-
-    svg.append("g")
-        .attr("class", "x axis")
-        .attr("transform", "translate(0," + height + ")")
-        .call(xAxis);
-      // debugger;
-
-    svg.append("g")
-        .attr("class", "y axis")
-        .call(yAxis)
-      .append("text")
-        .attr("transform", "rotate(-90)")
-        .attr("y", 6)
-        .attr("dy", "2em")
-        .style("text-anchor", "end")
-        .text("Temperature (ºF)");
-      // debugger;
-
-    svg.selectAll("circle")
-       .data(data)
-       .enter()
-       .append("circle")
-      .attr("cx", function(d) {
-        console.log(d.date);
-        console.log(typeof String(d.date));
-
-        return x(-parseDate(String(d.date)));
-      })
-      .attr("cy", function(d) {
-        console.log(d.cnn)
-        return y(d.cnn);
-      })
-      .attr("r", 5);
-
-    var city = svg.selectAll(".city")
-        .data(cities)
-      .enter().append("g")
-        .attr("class", "city");
-      // debugger;
-
-    // city.append("path")
-    //     .attr("class", "line")
-    //     .attr("d", function(d) { return line(d.values); })
-    //     .style("stroke", function(d) { return color(d.name); });
-      // debugger;
-
-  // var totalLength = path.node().getTotalLength();
-  //   path
-  //   .attr("stroke-dasharray", totalLength + " " + totalLength)
-  //   .attr("stroke-dashoffset", totalLength)
-  //   .transition()
-  //     .duration(5000)
-  //     .ease('linear')
-  //     .attr("stroke-dashoffset", 0);
+  yScale = d3.scale.linear()
+      .domain([0.3,-0.3])
+      .range([0,h]);
+}
 
 
-  //   city.append("text")
-  //       .datum(function(d) { return {name: d.name, value: d.values[d.values.length - 1]}; })
-  //       .attr("transform", function(d) { return "translate(" + x(d.value.date) + "," + y(d.value.temperature) + ")"; })
-  //       .attr("x", 3)
-  //       .attr("dy", ".35em")
-  //       .text(function(d) { return d.name; });
+function addToGraph (source) {
+
+  var self = this;
+  this.plotPoints = []
+  this.source = source
+
+  d3.json("/"+source, function(error, data){
+      console.log(data)
+      data.forEach(function(d){
+        self.plotPoints.push([d.date, d.score])
+      });
+
+    self.makeCircles(self.plotPoints);
+
   });
-});
+
+
+}
+
+
+addToGraph.prototype.makeCircles = function(points) {
+
+  console.log(points);
+  svg.select("circle")
+           .data(points)
+           .enter()
+           .append("circle")
+           .attr("date", function(d){return d[0]})
+           .attr('class', this.source)
+           // .attr
+           // .attr("fill", function(d){
+           //    var score = d[1]
+           //    if(score > 0.0){
+           //      return 'green'
+           //    }
+           //    else if (score < 0.0) {
+           //      return 'red'
+           //    }
+           //    else {
+           //      return 'purple'
+           //    }
+           // })
+          // .attr('fill', function(this.source){
+
+          // });
+        
+      .attr("cx", function(d) {
+            // console.log(d)
+              console.log(d)
+              console.log(xScale(d[0]))
+              return xScale(d[0]);
+           })
+       .attr("cy", function(d) {
+          return yScale(d[1]);
+       })
+       .attr("r", function(d) {
+           return 1 //Math.sqrt(h - d[1]);
+       });
+
+};
+
+
+BlankGraph.prototype.makeAxis = function() {
+        console.log(svg)
+        xAxis = d3.svg.axis()
+          // .tickFormat(function(d) {
+          //   // console.log(d);
+          //   var myDate = new Date( d * 1000);
+          //   console.log(myDate);
+          //   year = myDate.getYear()*100;
+          //   console.log(year);
+          //   return year
+          // })
+           .scale(xScale)
+           .orient("bottom")
+           // .ticks(30)
+
+      yAxis = d3.svg.axis()
+            .scale(yScale)
+            .orient("left")
+
+      svg.append("g")
+            .attr("class", "axis")
+            .attr("transform", "translate(0," + ((h/2)) + ")")
+            .call(xAxis);
+
+      svg.append("g")
+          .attr("class", "axis")
+          .attr("transform", "translate("+50+",0)")
+          .call(yAxis);
+};
+
+
+
+
+
+
+
+
+
+$(document).ready(function() {
+
+  graph = new BlankGraph()
+  graph.makeAxis()
+
+  $.each(sources, function(index, val) {
+    new addToGraph(val)
+  });
+
+
+
+  });
