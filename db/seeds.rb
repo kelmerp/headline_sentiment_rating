@@ -1,5 +1,5 @@
 require 'csv'
-path = './app/wayback_scrapper/fox_headlines/headline.csv'
+path = './app/wayback_scrapper/HP_headlines/headline.csv'
 
 CSV.foreach(path) do |row|
   s = Source.find_or_create_by(:name => row[0].to_s)
