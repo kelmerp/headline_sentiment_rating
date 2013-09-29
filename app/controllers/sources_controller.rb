@@ -17,11 +17,12 @@ class SourcesController < ApplicationController
     dates.uniq!.reverse
     dates.each do |date|
       score = source.headlines.get_average(date.to_s)
-      object = {cnn: score.to_f, date: date}
+      object = {cnn: score.to_f, thing: date}
+      p object
       final_array << object
     end
 
-    render json: final_array[0..50].to_json
+    render json: final_array.to_json
   end
 
   # def fox

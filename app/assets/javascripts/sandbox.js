@@ -5,8 +5,8 @@ $(document).ready(function() {
       width = 960 - margin.left - margin.right,
       height = 500 - margin.top - margin.bottom;
 
-  var parseDate = d3.time.format.utc("%Y-%m-%dT%H:%M:%S.%LZ").parse;
-
+  var parseDate = d3.time.format.utc("%a_%b_%d_%YT%H:%M:%S.%LZ").parse;
+// Mon Sep 23 2013 18:17:36 GMT-0500 (CDT) 
   var x = d3.time.scale()
       .range([0, width]);
 
@@ -38,6 +38,11 @@ $(document).ready(function() {
   d3.json("/cnn", function(error, data) {
     console.log(data);
     console.log(error);
+    // data.forEach(function(d) {
+    //   console.log(typeof String(d.date));
+    //   date = String(d.date)
+    //   d.date = parseDate(d.date);
+    // });
     color.domain(d3.keys(data[0]).filter(function(key) { return key !== "date"; }));
     data.forEach(function(d) {
       // console.log(d)
@@ -53,7 +58,7 @@ $(document).ready(function() {
       };
     });
 
-    x.domain(d3.extent(data, function(d) { return d.date; }));
+    x.domain(d3.extent(data, function(d) { console.log(d); return parseDate(String(d.date)); }));
 
     y.domain([
       d3.min(cities, function(c) { return d3.min(c.values, function(v) { return v.temperature; }); }),
@@ -82,10 +87,13 @@ $(document).ready(function() {
        .enter()
        .append("circle")
       .attr("cx", function(d) {
+        console.log(d);
         console.log(d.date);
-        console.log(typeof String(d.date));
-
-        return x(-parseDate(String(d.date)));
+        // console.log(parseDate(d.date));
+        console.log(parseDate(String(d.date)));
+        var date = x(parseDate(String(d.date)));
+        console.log(date);
+        return x(date);
       })
       .attr("cy", function(d) {
         console.log(d.cnn)
