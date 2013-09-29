@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20130929180737) do
     t.decimal  "sentiment_score"
     t.string   "sentiment_description"
     t.string   "sentiment_engine"
-    t.integer  "headlines_id"
+    t.integer  "headline_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
