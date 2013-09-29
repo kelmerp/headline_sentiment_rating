@@ -86,14 +86,16 @@ addToGraph.prototype.makeCircles = function(points) {
 BlankGraph.prototype.makeAxis = function() {
         console.log(svg)
         xAxis = d3.svg.axis()
-          // .tickFormat(function(d) {
-          //   // console.log(d);
-          //   var myDate = new Date( d * 1000);
-          //   console.log(myDate);
-          //   year = myDate.getYear()*100;
-          //   console.log(year);
-          //   return year
-          // })
+            // .tickValues()
+          .tickFormat(function(d) {
+            console.log(d);
+            var myDate = new Date( d * 1000);
+            console.log(myDate);
+            year = myDate.getUTCFullYear();
+            month = myDate.getUTCMonth() + 1;
+            console.log(year);
+            return month + "-" + year
+          })
            .scale(xScale)
            .orient("bottom")
            // .ticks(30)
