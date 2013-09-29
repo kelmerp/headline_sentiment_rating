@@ -4,7 +4,7 @@ class CreateSentimentData < ActiveRecord::Migration
       t.decimal :sentiment_score
       t.string :sentiment_description
       t.string :sentiment_engine
-      t.belongs_to :headlines
+      t.belongs_to :headline
 
       t.timestamps
     end
