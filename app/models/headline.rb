@@ -13,16 +13,6 @@ class Headline < ActiveRecord::Base
   end
 
   def self.get_average(some_date)
-    hdays = self.date(some_date)
-
-    score = 0
-
-    hdays.each do |day|
-      day.sentiment_data.each do |data|
-        score += data.sentiment_score
-      end
-    end
-
-    score/hdays.count
+    self.date(some_date).includes(:sentiment_data).average(:sentiment_score)
   end
 end
