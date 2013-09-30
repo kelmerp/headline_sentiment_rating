@@ -9,14 +9,14 @@ SET check_function_bodies = false;
 SET client_min_messages = warning;
 
 --
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner:
 --
 
 CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner:
 --
 
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
@@ -29,7 +29,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: headlines; Type: TABLE; Schema: public; Owner: apprentice; Tablespace: 
+-- Name: headlines; Type: TABLE; Schema: public; Owner: apprentice; Tablespace:
 --
 
 CREATE TABLE headlines (
@@ -67,7 +67,7 @@ ALTER SEQUENCE headlines_id_seq OWNED BY headlines.id;
 
 
 --
--- Name: sandboxes; Type: TABLE; Schema: public; Owner: apprentice; Tablespace: 
+-- Name: sandboxes; Type: TABLE; Schema: public; Owner: apprentice; Tablespace:
 --
 
 CREATE TABLE sandboxes (
@@ -101,7 +101,7 @@ ALTER SEQUENCE sandboxes_id_seq OWNED BY sandboxes.id;
 
 
 --
--- Name: schema_migrations; Type: TABLE; Schema: public; Owner: apprentice; Tablespace: 
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: apprentice; Tablespace:
 --
 
 CREATE TABLE schema_migrations (
@@ -112,7 +112,7 @@ CREATE TABLE schema_migrations (
 ALTER TABLE public.schema_migrations OWNER TO apprentice;
 
 --
--- Name: sentiment_data; Type: TABLE; Schema: public; Owner: apprentice; Tablespace: 
+-- Name: sentiment_data; Type: TABLE; Schema: public; Owner: apprentice; Tablespace:
 --
 
 CREATE TABLE sentiment_data (
@@ -150,7 +150,7 @@ ALTER SEQUENCE sentiment_data_id_seq OWNED BY sentiment_data.id;
 
 
 --
--- Name: sources; Type: TABLE; Schema: public; Owner: apprentice; Tablespace: 
+-- Name: sources; Type: TABLE; Schema: public; Owner: apprentice; Tablespace:
 --
 
 CREATE TABLE sources (
@@ -169158,7 +169158,7 @@ SELECT pg_catalog.setval('sources_id_seq', 5, true);
 
 
 --
--- Name: headlines_pkey; Type: CONSTRAINT; Schema: public; Owner: apprentice; Tablespace: 
+-- Name: headlines_pkey; Type: CONSTRAINT; Schema: public; Owner: apprentice; Tablespace:
 --
 
 ALTER TABLE ONLY headlines
@@ -169166,7 +169166,7 @@ ALTER TABLE ONLY headlines
 
 
 --
--- Name: sandboxes_pkey; Type: CONSTRAINT; Schema: public; Owner: apprentice; Tablespace: 
+-- Name: sandboxes_pkey; Type: CONSTRAINT; Schema: public; Owner: apprentice; Tablespace:
 --
 
 ALTER TABLE ONLY sandboxes
@@ -169174,7 +169174,7 @@ ALTER TABLE ONLY sandboxes
 
 
 --
--- Name: sentiment_data_pkey; Type: CONSTRAINT; Schema: public; Owner: apprentice; Tablespace: 
+-- Name: sentiment_data_pkey; Type: CONSTRAINT; Schema: public; Owner: apprentice; Tablespace:
 --
 
 ALTER TABLE ONLY sentiment_data
@@ -169182,7 +169182,7 @@ ALTER TABLE ONLY sentiment_data
 
 
 --
--- Name: sources_pkey; Type: CONSTRAINT; Schema: public; Owner: apprentice; Tablespace: 
+-- Name: sources_pkey; Type: CONSTRAINT; Schema: public; Owner: apprentice; Tablespace:
 --
 
 ALTER TABLE ONLY sources
@@ -169190,42 +169190,42 @@ ALTER TABLE ONLY sources
 
 
 --
--- Name: index_headlines_on_content; Type: INDEX; Schema: public; Owner: apprentice; Tablespace: 
+-- Name: index_headlines_on_content; Type: INDEX; Schema: public; Owner: apprentice; Tablespace:
 --
 
 CREATE INDEX index_headlines_on_content ON headlines USING btree (content);
 
 
 --
--- Name: index_headlines_on_date; Type: INDEX; Schema: public; Owner: apprentice; Tablespace: 
+-- Name: index_headlines_on_date; Type: INDEX; Schema: public; Owner: apprentice; Tablespace:
 --
 
 CREATE INDEX index_headlines_on_date ON headlines USING btree (date);
 
 
 --
--- Name: index_sentiment_data_on_sentiment_description; Type: INDEX; Schema: public; Owner: apprentice; Tablespace: 
+-- Name: index_sentiment_data_on_sentiment_description; Type: INDEX; Schema: public; Owner: apprentice; Tablespace:
 --
 
 CREATE INDEX index_sentiment_data_on_sentiment_description ON sentiment_data USING btree (sentiment_description);
 
 
 --
--- Name: index_sentiment_data_on_sentiment_engine; Type: INDEX; Schema: public; Owner: apprentice; Tablespace: 
+-- Name: index_sentiment_data_on_sentiment_engine; Type: INDEX; Schema: public; Owner: apprentice; Tablespace:
 --
 
 CREATE INDEX index_sentiment_data_on_sentiment_engine ON sentiment_data USING btree (sentiment_engine);
 
 
 --
--- Name: index_sentiment_data_on_sentiment_score; Type: INDEX; Schema: public; Owner: apprentice; Tablespace: 
+-- Name: index_sentiment_data_on_sentiment_score; Type: INDEX; Schema: public; Owner: apprentice; Tablespace:
 --
 
 CREATE INDEX index_sentiment_data_on_sentiment_score ON sentiment_data USING btree (sentiment_score);
 
 
 --
--- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: apprentice; Tablespace: 
+-- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: apprentice; Tablespace:
 --
 
 CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
