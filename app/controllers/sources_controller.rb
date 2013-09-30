@@ -41,6 +41,21 @@ class SourcesController < ApplicationController
     
   end
 
+  def cnn_calendar
+    dates = []
+    json_object = []
+
+    source = Source.find_by(name: 'http://www.cnn.com')
+    dates = source.headlines.pluck(:date).uniq!
+    # source.headlines.each {|d| dates << d.date.strftime("%Y-%m-%d")}
+    dates.sort.each do |date|
+      object = {date: date.strftime("%Y-%m-%d"), score: source.headlines.get_average(date).to_f }
+      json_object << object
+    end
+
+    render json: json_object.to_json
+  end
+
   # def fox
     
   # end
