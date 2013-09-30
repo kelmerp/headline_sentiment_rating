@@ -42,6 +42,7 @@ GEM
     coffee-script-source (1.6.3)
     d3-rails (3.3.5)
       railties (>= 3.1)
+    dalli (2.6.4)
     diff-lcs (1.2.4)
     erubis (2.7.0)
     execjs (2.0.1)
@@ -84,6 +85,7 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    memcachier (0.0.2)
     method_source (0.8.2)
     mime-types (1.25)
     mini_portile (0.5.1)
@@ -128,23 +130,6 @@ GEM
       ffi (>= 0.5.0)
     rdoc (3.12.2)
       json (~> 1.4)
-    redis (3.0.4)
-    redis-actionpack (4.0.0)
-      actionpack (~> 4)
-      redis-rack (~> 1.5.0)
-      redis-store (~> 1.1.0)
-    redis-activesupport (4.0.0)
-      activesupport (~> 4)
-      redis-store (~> 1.1.0)
-    redis-rack (1.5.0)
-      rack (~> 1.5)
-      redis-store (~> 1.1.0)
-    redis-rails (4.0.0)
-      redis-actionpack (~> 4)
-      redis-activesupport (~> 4)
-      redis-store (~> 1.1.0)
-    redis-store (1.1.4)
-      redis (>= 2.2)
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
@@ -209,15 +194,16 @@ DEPENDENCIES
   alchemy-api-rb
   coffee-rails (~> 4.0.0)
   d3-rails
+  dalli
   guard-rspec
   guard-spork
   jbuilder (~> 1.2)
   jquery-rails
+  memcachier
   nokogiri
   pg
   rails (= 4.0.0)
   rails_12factor
-  redis-rails (~> 4.0.0)
   rspec-rails (~> 2.0)
   sass-rails (~> 4.0.0)
   sdoc
