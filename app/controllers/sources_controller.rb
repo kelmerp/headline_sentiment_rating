@@ -7,38 +7,19 @@ class SourcesController < ApplicationController
 
   end
 
-  def cnn
 
-    dates = []
-    json_object = []
+  def grab_scatter
+    # grab_average('http://www.foxnews.com')
+    source_array = []
+    # num_of_sources = Sources.all
 
-    source = Source.find_by(name: 'http://www.cnn.com')
-
-    source.headlines.limit(5000).each {|d| dates << d.date.strftime("%Y%m%d")}
-    dates.uniq!.sort.reverse.each do |date|
-      object = {date: DateTime.parse(date).to_i, score: source.headlines.get_average(date).to_f }
-      json_object << object
+    Source.all.each do |source|
+      source_array << grab_average(source.name)
     end
 
-    render json: json_object.to_json
 
-  end
+    render json: source_array.flatten.to_json
 
-  def fox
-
-    dates = []
-    json_object = []
-
-    source = Source.find_by(name: 'http://www.foxnews.com')
-
-    source.headlines.limit(5000).each {|d| dates << d.date.strftime("%Y%m%d")}
-    dates.uniq!.sort.reverse.each do |date|
-      object = {date: DateTime.parse(date).to_i, score: source.headlines.get_average(date).to_f }
-      json_object << object
-    end
-
-    render json: json_object.to_json
-    
   end
 
   def cnn_calendar
@@ -56,7 +37,4 @@ class SourcesController < ApplicationController
     render json: json_object.to_json
   end
 
-  # def fox
-    
-  # end
 end
