@@ -38,9 +38,16 @@ gem 'sentimentalizer'
 
 gem "redis-rails", "~> 4.0.0"
 
+gem 'nokogiri'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
+end
+
+group :production, :staging do
+  gem "pg"
+  gem 'rails_12factor'
 end
 
 group :development, :test do
