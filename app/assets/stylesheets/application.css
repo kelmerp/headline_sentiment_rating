@@ -11,3 +11,102 @@
  *= require_self
  *= require_tree .
  */
+
+* {
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+}
+
+body {
+	margin: 0 auto;
+	line-height: 1.7em;
+}
+
+.l-box {
+	padding: 1em;
+}
+
+.header {
+	margin: 0 0;
+	background: #111;
+	color: white;
+	font-size: 20px;
+	text-align: center;
+	height: 45px;
+}
+
+.header .pure-menu {
+  padding: 0.5em;
+}
+
+.header .pure-menu li a:hover,
+.header .pure-menu li a:focus {
+  background: none;
+  border: none;
+  color: #aaa;
+}
+
+body .primary-button {
+background: #02a6eb;
+color: #fff;
+}
+
+.about {
+	text-align: center;
+	width: 50%;
+	margin: 2em auto 0;
+	padding: 3em 0.5em;
+	background: #eee;
+}
+.about .splash-head {
+  font-size: 300%;
+  margin: 0em 0;
+  line-height: 1.2em;
+}
+.about .splash-subhead {
+  color: #999;
+  font-weight: 300;
+  line-height: 1.4em;
+}
+
+.content .content-subhead {
+	color: #999;
+	padding-bottom: 0.3em;
+	text-transform: uppercase;
+	margin: 0;
+	border-bottom: 2px solid #eee;
+	display: inline-block;
+}
+
+.content .content-ribbon {
+	margin: 1em;
+	border-bottom: 1px solid #eee;
+}
+
+.ribbon {
+	background: #eee;
+	text-align: center;
+	padding: 2em;
+	color: #999;
+	width: 100%;
+	position: fixed; 
+	top: 735px;
+}
+.ribbon h2 {
+  display: inline;
+  font-weight: normal;
+}
+
+.footer {
+	background: #111;
+	color: white;
+	text-align: center;
+	padding: 1em;
+	font-size: 80%;
+	width: 100%;
+	position: fixed;
+	bottom: 0px;
+	box-shadow: 0px 1px 25px #5E5E5E;
+	background-color:#262626;
+}
