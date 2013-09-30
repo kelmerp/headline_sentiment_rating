@@ -36,7 +36,8 @@ gem 'sentiment_analysis'
 gem 'sentimental'
 gem 'sentimentalizer'
 
-gem "redis-rails", "~> 4.0.0"
+gem 'memcachier'
+gem 'dalli'
 
 gem 'nokogiri'
 
