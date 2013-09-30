@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130929180737) do
+ActiveRecord::Schema.define(version: 20130930140532) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20130929180737) do
     t.datetime "updated_at"
   end
 
+  add_index "sentiment_data", ["headline_id"], name: "index_sentiment_data_on_headline_id", using: :btree
   add_index "sentiment_data", ["sentiment_description"], name: "index_sentiment_data_on_sentiment_description", using: :btree
   add_index "sentiment_data", ["sentiment_engine"], name: "index_sentiment_data_on_sentiment_engine", using: :btree
   add_index "sentiment_data", ["sentiment_score"], name: "index_sentiment_data_on_sentiment_score", using: :btree
