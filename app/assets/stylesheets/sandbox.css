@@ -19,19 +19,49 @@ body {
   stroke-width: 1.5px;
 }
 
-.cnn{
+circle.cnn{
   fill: blue;
+  opacity:.4;
 }
 
-.fox{
+path.cnn {
+  fill:  none;
+  stroke: blue;
+  stroke-width: 1px;
+}
+
+circle.foxnews{
   fill: red;
+  opacity:.4;
 }
 
+path.foxnews{
+  fill:  none;
+  stroke: red;
+  stroke-width: 1px;
+}
 
+circle.huffingtonpost{
+  fill: green;
+  opacity:.4;
+}
 
+path.huffingtonpost{
+  fill:  none;
+  stroke: green;
+  stroke-width: 1px;
+}
 
+circle.msnbc{
+  fill: yellow;
+  opacity:.4;
+}
 
-
+path.msnbc{
+  fill:  none;
+  stroke: yellow;
+  stroke-width: 1px;
+}
 
 
 
