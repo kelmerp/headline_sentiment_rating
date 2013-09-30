@@ -6,6 +6,8 @@ HeadlineAnalysis::Application.routes.draw do
   resources :sources
   get '/cnn' => "sources#cnn"
   get '/fox' => "sources#fox"
+  get '/calendar' => "sandbox#calendar"
+  get '/cnn_calendar' => "sources#cnn_calendar"
   root 'sandbox#index'
 
 

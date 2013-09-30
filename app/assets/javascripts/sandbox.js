@@ -126,10 +126,10 @@ BlankGraph.prototype.makeAxis = function() {
 $(document).ready(function() {
 
   graph = new BlankGraph()
-  graph.makeAxis()
+  // graph.makeAxis()
 
   $.each(sources, function(index, val) {
-    new addToGraph(val)
+    // new addToGraph(val)
   });
 
 
