@@ -20,12 +20,12 @@ body {
 }
 
 circle{
-  /*opacity: */
+  opacity: .9;
 }
 
 circle.cnn{
   fill: blue;
-  opacity:.4;
+  /*opacity:.4;*/
 }
 
 path.cnn {
@@ -36,7 +36,6 @@ path.cnn {
 
 circle.foxnews{
   fill: red;
-  opacity:.4;
   -webkit-transition: all 200ms ease-out;
 
 }
@@ -49,7 +48,6 @@ path.foxnews{
 
 circle.huffingtonpost{
   fill: green;
-  opacity:.4;
 }
 
 path.huffingtonpost{
@@ -60,12 +58,31 @@ path.huffingtonpost{
 
 circle.msnbc{
   fill: yellow;
-  opacity:.4;
 }
 
 path.msnbc{
   fill:  none;
   stroke: yellow;
+  stroke-width: 1px;
+}
+
+circle.yahoo{
+  fill: cyan;
+}
+
+path.yahoo{
+  fill: none;
+  stroke: cyan;
+  stroke-width: 1px;
+}
+
+circle.cnnpolitics{
+  fill: orange;
+}
+
+path.cnnpolitics{
+  fill: none;
+  stroke: orange;
   stroke-width: 1px;
 }
 
