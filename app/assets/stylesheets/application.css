@@ -20,11 +20,11 @@ box-sizing: border-box;
 
 body {
 	margin: 0 auto;
-	line-height: 1.7em;
+	line-height: 27px;
 }
 
-.l-box {
-	padding: 1em;
+.box {
+	padding: 10px;
 }
 
 .header {
@@ -34,75 +34,49 @@ body {
 	font-size: 20px;
 	text-align: center;
 	height: 45px;
-}
-
-.header .pure-menu {
-  padding: 0.5em;
-}
-
-.header .pure-menu li a:hover,
-.header .pure-menu li a:focus {
-  background: none;
-  border: none;
-  color: #aaa;
-}
-
-body .primary-button {
-background: #02a6eb;
-color: #fff;
+	padding: 10px;
 }
 
 .about {
 	text-align: center;
 	width: 50%;
-	margin: 2em auto 0;
-	padding: 3em 0.5em;
+	margin: 15px auto 0;
+	padding: 25px 5px;
 	background: #eee;
 }
+
 .about .splash-head {
   font-size: 300%;
-  margin: 0em 0;
-  line-height: 1.2em;
+  margin: 0px 0;
+  line-height: 25px;
 }
+
 .about .splash-subhead {
   color: #999;
   font-weight: 300;
-  line-height: 1.4em;
+  line-height: 20px;
 }
 
-.content .content-subhead {
-	color: #999;
-	padding-bottom: 0.3em;
-	text-transform: uppercase;
-	margin: 0;
-	border-bottom: 2px solid #eee;
-	display: inline-block;
-}
-
-.content .content-ribbon {
-	margin: 1em;
-	border-bottom: 1px solid #eee;
+.content-body {
+  height: 500px;
+  background-color: red;
 }
 
 .ribbon {
 	background: #eee;
 	text-align: center;
-	padding: 2em;
+	padding: 32px;
 	color: #999;
 	width: 100%;
 	position: fixed; 
 	top: 735px;
-}
-.ribbon h2 {
-  display: inline;
-  font-weight: normal;
 }
 
 .footer {
 	background: #111;
 	color: white;
 	text-align: center;
-	padding: 1em;
+	padding: 5px;
 	font-size: 80%;
 	width: 100%;
 	position: fixed;
