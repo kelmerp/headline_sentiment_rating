@@ -19,6 +19,10 @@ body {
   stroke-width: 1.5px;
 }
 
+circle{
+  /*opacity: */
+}
+
 circle.cnn{
   fill: blue;
   opacity:.4;
@@ -33,6 +37,8 @@ path.cnn {
 circle.foxnews{
   fill: red;
   opacity:.4;
+  -webkit-transition: all 200ms ease-out;
+
 }
 
 path.foxnews{
@@ -63,7 +69,11 @@ path.msnbc{
   stroke-width: 1px;
 }
 
-
+.hide{
+  display: none;
+  opacity: 0;
+  /*-webkit-transition: all 200ms ease-out;*/
+}
 
 
 
@@ -77,7 +87,10 @@ path.msnbc{
   fill: #fff;
   stroke: #ccc;
 }
-
+#calendars{
+  height: 450px;
+  width: 500px;
+}
 .month {
   fill: none;
   stroke: #000;
