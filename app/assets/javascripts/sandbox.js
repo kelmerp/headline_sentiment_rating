@@ -16,6 +16,46 @@ transition = d3.transition()
     .ease("linear");
 }
 
+function Calendar (data,source) {
+
+  this.el = $('.'+source);
+  this.source = source;
+  this.visible = false;
+  this.button = $("#calendarButtons ."+source);
+  var self = this;
+
+  var calendarData =  _.map(data,function (el,i,list) {
+                    day = [];
+                    day[0] = moment.unix(el[0]).format('YYYY-MM-DD');
+                    day[1] = el[1];
+                    day[2] = el[2];
+                    return day;
+                  });
+
+
+  this.data = calendarData
+  // this.drawCalendar(this.data);
+
+this.button.on('click', function(event) {
+    event.preventDefault();
+    // console.log(self.circleGroup)
+    if (self.el.hasClass('hidden')){
+      console.log("CALLLED")
+      console.log(self.visible);
+      self.drawCalendar(self.data);
+
+      $("#calendarButtons").children().addClass('hidden');
+      self.el.removeClass('hidden');
+    }
+  });
+
+  if (!this.el.hasClass('hidden')) {self.drawCalendar(self.data)};
+  // console.log(this.source);
+  // console.log(calendarData);
+
+
+}
+
 function grabSources (argument) {
     var plotPoints =[];
 
@@ -46,21 +86,23 @@ function grabSources (argument) {
     sources = _.groupBy(plotPoints, function(d){return d[2]});
 
       _.each(sources,function(value,key,list){
-      new newSource(value, key)});
+        new newSource(value, key)});
       });
 }
 
 
 function newSource(data, source) {
 
+
   var self = this;
 
   this.data = data
   this.source = source
-  this.button = $('#'+source);
+  this.button = $('#scatterButtons .'+source);
   this.circleGroup = svg.append('svg:g');
   this.linePlot = svg.append('path');
   this.visible = true;
+  this.calendar = new Calendar(data,source);
 
   // d3.json("/scatter", function(error, data){
   //     data.forEach(function(d){
@@ -76,20 +118,17 @@ function newSource(data, source) {
 
 
   this.button.on('click', function(event) {
-    console.log(self.visible);
     event.preventDefault();
     // console.log(self.circleGroup)
     if (self.visible == true){
-      console.log("self should say true ")
           self.circleGroup.transition()
               .style('opacity',0);
           self.linePlot.transition()
               .style('opacity',0);
-      self.visible = false;
+          self.visible = false;
 
     }
     else{
-          console.log("this is the else")
           self.circleGroup.transition()
               .style('opacity',1);
           self.linePlot.transition()
@@ -97,9 +136,6 @@ function newSource(data, source) {
 
       self.visible = true;
     }
-      console.log("self should say false")
-      console.log(self.visible);
-
     });
 
     graph.makeAxis()
@@ -229,7 +265,7 @@ BlankGraph.prototype.makeAxis = function() {
 
 
 $(document).ready(function() {
-
+  // Calendar();
   graph = new BlankGraph()
 
   grabSources();
