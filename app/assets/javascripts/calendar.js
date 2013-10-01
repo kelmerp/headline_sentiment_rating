@@ -1,9 +1,10 @@
-// $(document).ready(function() {
-
+//  $(document).ready(function() {
+// // var my_request = d3.xhr('/cnn_calendar')
+// // my_request.post(function(d){
 
 // var width = 960,
-//     height = 136,
-//     cellSize = 17; // cell size
+//     height = 96,
+//     cellSize = 10; // cell size
 
 // var day = d3.time.format("%w"),
 //     week = d3.time.format("%U"),
@@ -14,7 +15,7 @@
 //     .domain([-.3, .3])
 //     .range(d3.range(11).map(function(d) { return "q" + d + "-11"; }));
 
-// var svg = d3.select("body").selectAll("svg")
+// var svg = d3.select("#calendars").selectAll("svg")
 //     .data(d3.range(2007, 2014))
 //   .enter().append("svg")
 //     .attr("width", width)
@@ -63,12 +64,14 @@
 // //     .key(function(d) { return d.Date; })
 // //     .rollup(function(d) { return (d[0].Close - d[0].Open) / d[0].Open; })
 // //     .map(csv);
-//   days = {};
+// days = {};
+// // my_post = d3.xhr("/cnn_calendar")
 //   d3.json("/cnn_calendar", function(error, data){
+//     days = {};
 //       console.log(data)
 //       data.forEach(function(d){
 //         days[d.date] = d.score;
-//       console.log(days);
+//       // console.log(days);
 //       data = days;
 
 //       rect.filter(function(d) { return d in data; })
@@ -83,7 +86,7 @@
 //   });
 
 
-// });
+//  });
 
 
 

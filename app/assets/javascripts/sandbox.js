@@ -1,4 +1,4 @@
-sources = ["fox"]
+// sources = ["fox"]
 
 function BlankGraph () {
 
@@ -6,46 +6,33 @@ function BlankGraph () {
   h = 450
   padding = 60;
 
-  svg = d3.select("body")
+  svg = d3.select("#scatter")
               .append('svg')
               .attr("width", w)
               .attr("height", h);
 
+transition = d3.transition()
+    .duration(750)
+    .ease("linear");
 }
 
+function grabSources (argument) {
+    var plotPoints =[];
 
+    d3.json("/scatter", function(error, data){
 
-function addToGraph (source) {
-
-  var self = this;
-  this.plotPoints = []
-  this.source = source
-
-  d3.json("/scatter", function(error, data){
       data.forEach(function(d){
-        self.plotPoints.push([d.date, d.score, d.source])
+        plotPoints.push([d.date, d.score, d.source])
       });
-  // });
-
-  sources = _.groupBy(self.plotPoints, function(d){return d[2]});
 
 
+    xScale = d3.scale.linear()
+        .domain([d3.min(plotPoints, function (d) { return d[0] }),d3.max(plotPoints, function(d) { return d[0]; })])
+        .range([padding,w - padding]);
 
-
-
-  xScale = d3.scale.linear()
-      // .domain([1196121600, 1380153600])
-      .domain([d3.min(self.plotPoints, function (d) { return d[0] }),d3.max(self.plotPoints, function(d) { return d[0]; })])
-      .range([padding,w - padding]);
-
-  yScale = d3.scale.linear()
-      .domain([0.3,-0.3])
-      .range([0,h]);
-
-      d3.svg.line()
-        .x(function  (d) {
-            return x
-        })
+    yScale = d3.scale.linear()
+        .domain([0.3,-0.3])
+        .range([0,h]);
 
     line = d3.svg.line()
         .interpolate("basis")
@@ -56,21 +43,70 @@ function addToGraph (source) {
           return yScale(d[1]);
         });
 
+    sources = _.groupBy(plotPoints, function(d){return d[2]});
 
-    self.makeCircles(self.plotPoints);
+      _.each(sources,function(value,key,list){
+      new newSource(value, key)});
+      });
+}
 
-    _.each(sources,function(value,key,list){
-      months = monthlyAverages(value);
-      self.makeLine(months, key);
+
+function newSource(data, source) {
+
+  var self = this;
+
+  this.data = data
+  this.source = source
+  this.button = $('#'+source);
+  this.circleGroup = svg.append('svg:g');
+  this.linePlot = svg.append('path');
+  this.visible = true;
+
+  // d3.json("/scatter", function(error, data){
+  //     data.forEach(function(d){
+  //       self.plotPoints.push([d.date, d.score, d.source])
+  //     });
+  // // });
+
+  // sources = _.groupBy(self.plotPoints, function(d){return d[2]});
+
+  this.makeCircles(this.data)
+  var months = monthlyAverages(this.data);
+  this.makeLine(months, source);
+
+
+  this.button.on('click', function(event) {
+    console.log(self.visible);
+    event.preventDefault();
+    // console.log(self.circleGroup)
+    if (self.visible == true){
+      console.log("self should say true ")
+          self.circleGroup.transition()
+              .style('opacity',0);
+          self.linePlot.transition()
+              .style('opacity',0);
+      self.visible = false;
+
+    }
+    else{
+          console.log("this is the else")
+          self.circleGroup.transition()
+              .style('opacity',1);
+          self.linePlot.transition()
+              .style('opacity',1);
+
+      self.visible = true;
+    }
+      console.log("self should say false")
+      console.log(self.visible);
+
     });
-    // self.makeLine(sources)
 
     graph.makeAxis()
 
 
-  });
+  };
 
-};
 
 function oddIndexes (array) {
   var result = []
@@ -115,54 +151,38 @@ function monthlyAverages (points, source) {
 
     monthAverages.push([midMonth,average]);
 
-  });
+    });
 
-  return monthAverages
+    return monthAverages
 
    // makeLine(monthAverages, source);
 }
 
 
-addToGraph.prototype.makeCircles = function(points) {
+newSource.prototype.makeCircles = function(points) {
 
-  svg.selectAll("circle")
+  this.circleGroup.selectAll("circle")
            .data(points)
            .enter()
            .append("circle")
            .attr("date", function(d){return d[0]})
            .attr('class', function(d){ return d[2]})
-           // .attr
-           // .attr("fill", function(d){
-           //    var score = d[1]
-           //    if(score > 0.0){
-           //      return 'green'
-           //    }
-           //    else if (score < 0.0) {
-           //      return 'red'
-           //    }
-           //    else {
-           //      return 'purple'
-           //    }
-           // })
-          // .attr('fill', function(this.source){
 
-          // });
-
-      .attr("cx", function(d) {
-              return xScale(d[0]);
+          .attr("cx", function(d) {
+                  return xScale(d[0]);
+               })
+           .attr("cy", function(d) {
+              return yScale(d[1]);
            })
-       .attr("cy", function(d) {
-          return yScale(d[1]);
-       })
-       .attr("r", function(d) {
-           return 1 //Math.sqrt(h - d[1]);
-       });
+           .attr("r", function(d) {
+               return 1 //Math.sqrt(h - d[1]);
+           });
 
-
+           return this.circleGroup;
 };
 
-addToGraph.prototype.makeLine = function(months, source) {
-      svg.append("path")
+newSource.prototype.makeLine = function(months, source) {
+              this.linePlot
       .attr('class', 'line')
       .attr('class', source)
       .attr('d',function (d) {
@@ -208,15 +228,15 @@ BlankGraph.prototype.makeAxis = function() {
 
 
 
-
-
 $(document).ready(function() {
 
   graph = new BlankGraph()
 
-  $.each(sources, function(index, val) {
-    new addToGraph(val)
-  });
+  grabSources();
+
+  // $.each(sources, function(index, val) {
+  //   grabSources();
+  // });
 
 
 
