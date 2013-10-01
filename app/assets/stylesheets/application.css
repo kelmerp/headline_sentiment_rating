@@ -58,8 +58,76 @@ body {
 }
 
 .content-body {
+  width: 100%;	
   height: 500px;
   background-color: red;
+}
+
+
+.svg {
+  width: 70%;
+  height: 450px;
+  margin-left: 215px;
+  margin-top: 5px;
+  padding-top: 10px;
+  background-color: yellow;
+}
+
+.buttons {
+  margin-left: 8px;
+  height: 450px;
+  width: 200px;
+  background-color: blue;
+  margin-top: -440px
+}
+
+.cnn {
+  height: 40px;
+  width: 200px;
+  background-color: green;
+  margin-top: -440px
+}
+
+.cnn-politics {
+  height: 40px;
+  width: 200px;
+  background-color: green;
+  margin-top: 10px
+}
+
+.fox {
+  height: 40px;
+  width: 200px;
+  background-color: green;
+  margin-top: 10px
+}
+
+.msnbc {
+  height: 40px;
+  width: 200px;
+  background-color: green;
+  margin-top: 10px
+}
+
+.huffpost {
+  height: 40px;
+  width: 200px;
+  background-color: green;
+  margin-top: 10px
+}
+
+.yahoo {
+  height: 40px;
+  width: 200px;
+  background-color: green;
+  margin-top: 10px
+}
+
+.onion {
+  height: 40px;
+  width: 200px;
+  background-color: green;
+  margin-top: 10px
 }
 
 .ribbon {
