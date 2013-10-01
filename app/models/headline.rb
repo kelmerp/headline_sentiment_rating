@@ -1,10 +1,16 @@
 class Headline < ActiveRecord::Base
-  has_many :sentiment_data, :uniq => true
+  has_many :sentiment_data, :dependent => :destroy
   belongs_to :source
-  validates :content, length: { in: 15..255},
+  validates :content, length: { in: 15..255 },
             uniqueness: true
   validates :date, presence: true
   validates :archive_url, presence: true
+
+  validate :has_sentiment_data
+
+  def has_sentiment_data
+    errors.add(:headline, ":a headline must have sentiment data") if self.sentiment_data.empty?
+  end
 
   def self.date(some_date) # returns all of the headlines that match that date
     search_date = DateTime.parse(some_date.to_s)
