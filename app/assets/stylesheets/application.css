@@ -11,6 +11,49 @@
  *= require_self
  *= require_tree .
  */
+ html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
 
 * {
 -webkit-box-sizing: border-box;
@@ -18,9 +61,101 @@
 box-sizing: border-box;
 }
 
+h1{
+  font-size: 3em;
+}
+
+h2{
+  font-size: 2em;
+}
+
+
+p{
+  font-size: 2em;
+}
+
+span{
+  font-size: 2em;
+}
+
+nav {
+  width: 100%;
+  background-color: #999;
+  text-align: left;
+  padding: .5em;
+}
+
 body {
 	margin: 0 auto;
-	line-height: 27px;
+	/*line-height: 27px;*/
+  width: 100%;
+  height: 100%;
+}
+
+#wrapper{
+  width: 85%;
+  margin: auto; 
+  height: 100%;
+  margin-bottom: 100px;
+}
+
+#hero{
+  padding: 2em;
+  /*margin-top: 2em;*/
+  width: 70%;
+  margin: 2em auto;
+  background-color: #999;
+  border-radius: 5px;
+}
+
+section{
+  border-radius: 5px;
+  margin-top: 5em;
+  width: 100%;
+  background-color: #eee;
+}
+
+ ul{
+  float: left;
+  width: 10%;
+  /*height: */
+  border:1px black;
+}
+
+ ul li{
+  text-align: center;
+  padding: 1.5em;
+  font-size: 1.5em;
+  border-bottom: 1px dashed black;
+}
+
+ ul li:hover{
+  cursor: pointer;
+  background-color: whitesmoke;
+}
+
+#scatterplot{
+  /*float: right;*/
+  margin-left: 10%;
+  width: 90%;
+  height: 46em;
+  /*min-height: 300px;*/
+  background-color: #999;
+}
+
+#calendar{
+  float: left;
+  background-color: #999;
+  height: 70em;
+  width: 60%;
+}
+
+#headlines{
+  /*display: inline-block;*/
+  text-align: center;
+  float: right;
+  width: 30%;
+  background-color: whitesmoke;
 }
 
 .box {
@@ -65,22 +200,28 @@ body {
   width: 100%;	
   height: 500px;
   background-color: red;
+  width: 100%;
+}
+
+.data_visual{
+  width: 80%;
+  margin: auto;
 }
 
 
 .svg-graph {
   width: 70%;
   height: 450px;
-  margin-left: 290px;
-  margin-top: 5px;
-  padding-top: 10px;
+  /*margin-left: 290px;*/
+  /*margin-top: 5px;*/
+  /*padding-top: 10px;*/
   background-color: yellow;
 }
 
 .buttons-graph {
-  margin-left: 8px;
+  /*margin-left: 8px;*/
   height: 450px;
-  width: 200px;
+  width: 25%;
   background-color: blue;
 }
 
@@ -210,15 +351,15 @@ body {
   margin-top: 10px
 }
 
-.ribbon {
-	background: #eee;
+/*.ribbon {*/
+/*	background: #eee;
 	text-align: center;
 	padding: 32px;
 	color: #999;
 	width: 100%;
 	position: fixed; 
 	top: 950px;
-}
+}*/
 
 .footer {
 	background: #111;
@@ -227,8 +368,26 @@ body {
 	padding: 5px;
 	font-size: 80%;
 	width: 100%;
-	position: fixed;
+	position: relative;
 	bottom: 0px;
 	box-shadow: 0px 1px 25px #5E5E5E;
 	background-color:#9A8E8A;
+}
+
+.cf:before,
+.cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.cf:after {
+    clear: both;
+}
+
+/**
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+.cf {
+    *zoom: 1;
 }
