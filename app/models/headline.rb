@@ -18,7 +18,13 @@ class Headline < ActiveRecord::Base
     self.where(date: date_range)
   end
 
-  def self.get_average(some_date)
+  def self.get_average(some_date, source_id)
     self.date(some_date).includes(:sentiment_data).average(:sentiment_score)
+  end
+
+  def self.get_average_cached(some_date, source_id)
+    Rails.cache.fetch("avg_for_headline_by_day:#{source_id}:#{some_date.strftime("%Y%m%d")}") do
+      self.get_average(some_date, source_id)
+    end
   end
 end

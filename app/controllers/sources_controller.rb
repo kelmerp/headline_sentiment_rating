@@ -1,22 +1,18 @@
 class SourcesController < ApplicationController
 
-
   def index
-
-  sources = Source.all
-
+    sources = Source.all
   end
-
 
   def grab_scatter
     # grab_average('http://www.foxnews.com')
-    source_array = []
-    # num_of_sources = Sources.all
-    Source.all.find_each do |source|
-      source_array << grab_average(source.name)
-    end
+    # source_array = []
+    # # num_of_sources = Sources.all
+    # Source.all.find_each do |source|
+    #   source_array << grab_average_cached(source.name)
+    # end
 
-    render json: source_array.flatten.to_json
+    render json: Source.get_all_cached.flatten.to_json
   end
 
   def headlines
