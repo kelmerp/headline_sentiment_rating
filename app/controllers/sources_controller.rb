@@ -24,7 +24,7 @@ class SourcesController < ApplicationController
     source = Source.find_by(name: params["param2"])
     headline_records = source.headlines.date(params["param1"])
     # @headlines.order(@headlines.date.to_i)
-    headline_records.each do |headline|
+    headline_records.find_each do |headline|
       @headlines[headline.content] = headline.sentiment_data.first.sentiment_score
     end
     p "HERES YOUR HASH"
