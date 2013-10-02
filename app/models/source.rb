@@ -1,6 +1,7 @@
 class Source < ActiveRecord::Base
   has_many :headlines, :dependent => :destroy
   validates :name, presence: true, uniqueness: true
+  validates :url, presence: true, uniqueness: true
 
   def get_average_for_date(some_date)
     self.headlines.get_average(some_date)

@@ -1,19 +1,16 @@
-// sources = ["fox"]
 
 function BlankGraph () {
 
-  w = 1200
-  h = 450
+
+  w = $("#scatter").width();
+  h = $("#scatter").height();
   padding = 60;
 
   svg = d3.select("#scatter")
               .append('svg')
               .attr("width", w)
-              .attr("height", h);
+              .attr("height", h)
 
-transition = d3.transition()
-    .duration(750)
-    .ease("linear");
 }
 
 function Calendar (data,source) {
@@ -38,21 +35,18 @@ function Calendar (data,source) {
 
 this.button.on('click', function(event) {
     event.preventDefault();
-    // console.log(self.circleGroup)
-    if (self.el.hasClass('hidden')){
+    if (!self.el.hasClass('visible')){
       console.log("CALLLED")
-      console.log(self.visible);
       self.drawCalendar(self.data);
 
-      $("#calendarButtons").children().addClass('hidden');
-      self.el.removeClass('hidden');
+      $("#calendarButtons").children().removeClass('visible');
+      self.el.addClass('visible');
     }
   });
 
-  if (!this.el.hasClass('hidden')) {self.drawCalendar(self.data)};
+    if (this.el.hasClass('visible')) {self.drawCalendar(self.data)};
   // console.log(this.source);
   // console.log(calendarData);
-
 
 }
 
@@ -64,14 +58,14 @@ function grabSources (argument) {
       data.forEach(function(d){
         plotPoints.push([d.date, d.score, d.source])
       });
-
+      $("#waiting").remove()
 
     xScale = d3.scale.linear()
         .domain([d3.min(plotPoints, function (d) { return d[0] }),d3.max(plotPoints, function(d) { return d[0]; })])
         .range([padding,w - padding]);
 
     yScale = d3.scale.linear()
-        .domain([0.3,-0.3])
+        .domain([0.2,-0.2])
         .range([0,h]);
 
     line = d3.svg.line()
@@ -265,15 +259,10 @@ BlankGraph.prototype.makeAxis = function() {
 
 
 $(document).ready(function() {
+  $("#waiting").prepend("<h2>Loading...</h2><img alt='Slipnslide' src='/assets/deal_with_it.gif'>")
   // Calendar();
   graph = new BlankGraph()
 
   grabSources();
+});
 
-  // $.each(sources, function(index, val) {
-  //   grabSources();
-  // });
-
-
-
-  });

@@ -10,6 +10,7 @@ HeadlineAnalysis::Application.routes.draw do
   get '/calendar' => "sandbox#calendar"
   get '/cnn_calendar' => "sources#cnn_calendar"
   get '/welcome' => "welcome#index"
+  post '/headlines'   => "sources#headlines"
   root 'sandbox#index'
 
 
