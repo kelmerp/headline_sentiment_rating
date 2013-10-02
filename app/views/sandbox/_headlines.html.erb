@@ -1,0 +1,8 @@
+<% if @headlines %>
+<h2><%= link_to("Check out the Homepage", @link) %></h2>
+<ol>
+  <%@headlines.each do |headline|  %>
+    <li><%= headline[0]%> <span><%= headline[1].round(3) %></span></li>
+<% end %>
+ </ol>
+<% end %>
