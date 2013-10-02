@@ -143,6 +143,11 @@ img{
   /*width: 500px;
   height: 100px;*/
 }
+#waiting {
+display: block;
+width: 850px;
+margin: 0 auto;
+}
 
 .RdYlGn .q0-11{fill:rgb(165,0,38)}
 .RdYlGn .q1-11{fill:rgb(215,48,39)}

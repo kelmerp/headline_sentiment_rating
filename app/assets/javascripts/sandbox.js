@@ -58,7 +58,7 @@ function grabSources (argument) {
       data.forEach(function(d){
         plotPoints.push([d.date, d.score, d.source])
       });
-      $("img").remove()
+      $("#waiting").remove()
 
     xScale = d3.scale.linear()
         .domain([d3.min(plotPoints, function (d) { return d[0] }),d3.max(plotPoints, function(d) { return d[0]; })])
@@ -259,7 +259,7 @@ BlankGraph.prototype.makeAxis = function() {
 
 
 $(document).ready(function() {
-  $("body").prepend("<img alt='Slipnslide' src='/assets/deal_with_it.gif'>")
+  $("#waiting").prepend("<h2>Loading...</h2><img alt='Slipnslide' src='/assets/deal_with_it.gif'>")
   // Calendar();
   graph = new BlankGraph()
 
