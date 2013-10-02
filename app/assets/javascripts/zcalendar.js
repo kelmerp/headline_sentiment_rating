@@ -5,8 +5,8 @@ Calendar.prototype.drawCalendar = function(data){
 
 // var my_request = d3.xhr('/cnn_calendar')
 // my_request.post(function(d){
-
-  var width = 960,
+  console.log('called');
+  var width = $('#calendars').width(),
       height = 96,
       cellSize = 10; // cell size
 
@@ -20,13 +20,13 @@ Calendar.prototype.drawCalendar = function(data){
       .range(d3.range(11).map(function(d) { return "q" + d + "-11"; }));
 
   var svg = d3.select("#calendars").selectAll("svg")
-      .data(d3.range(2007, 2014))
+      .data(d3.range(2008, 2014))
     .enter().append("svg")
       .attr("width", width)
       .attr("height", height)
       .attr("class", "RdYlGn")
     .append("g")
-      .attr("transform", "translate(" + ((width - cellSize * 53) / 2) + "," + (height - cellSize * 7 - 1) + ")");
+      .attr("transform", "translate(" + (10+(width - cellSize * 53) / 2) + "," + (height - cellSize * 7 - 1) + ")");
 
   svg.append("text")
       .attr("transform", "translate(-6," + cellSize * 3.5 + ")rotate(-90)")
@@ -105,9 +105,10 @@ function grabHeadlines (date) {
     console.log(response);
     var headlines = response;
 
-
-
-    $("#headlines").append(headlines.html);
+    $.modal(headlines.html, {
+      appendTo: "#wrapper",
+      minWidth: 500
+    });
 
   })
   .fail(function() {
@@ -116,9 +117,11 @@ function grabHeadlines (date) {
   .always(function() {
     console.log("complete");
   });
-  
 
-
+  $("#wrapper").on('click', '#simplemodal-overlay', function(event) {
+    event.preventDefault();
+    $.modal.close();
+  });
 
 
 }

@@ -64,6 +64,7 @@ def clean_data(tags)
     cleaned_tag = tag.text.gsub("\n"," ").strip
     next if cleaned_tag.length < 15
     next if @black_list.include?(cleaned_tag)
+    next if @cleaned_headlines.include?(cleaned_tag)
     next if cleaned_tag.include?("AP Photo")
     next if cleaned_tag.include?("http")
     next if cleaned_tag.include?("//")

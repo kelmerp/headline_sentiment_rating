@@ -1,10 +1,6 @@
 body {
   font: 10px sans-serif;
 }
-#scatter{
-  width: 800px;
-  height: 450px;
-}
 .axis path,
 .axis line {
   fill: none;
@@ -16,93 +12,99 @@ body {
   display: none;
 }
 
+.axis text{
+  font-size: 1em;
+}
+
 .line {
   fill: none;
   stroke: steelblue;
-  stroke-width: 1.5px;
+  stroke-width: 3px;
+}
+
+path{
+  stroke-width: 2px;
 }
 
 circle{
-  opacity: .4;
+  opacity: .35;
 }
 
 circle.cnn{
-  fill: blue;
+  fill: #ED2D2E;
   /*opacity:.4;*/
 }
 
 path.cnn {
   fill:  none;
-  stroke: blue;
-  stroke-width: 1px;
+  stroke: #ED2D2E;
+  /*stroke-width: 1px;*/
 }
 
 circle.foxnews{
-  fill: red;
-  -webkit-transition: all 200ms ease-out;
+  fill: #008C47;
 
 }
 
 path.foxnews{
   fill:  none;
-  stroke: red;
-  stroke-width: 1px;
+  stroke: #008C47;
+  /*stroke-width: 1px;*/
 }
 
 circle.huffingtonpost{
-  fill: green;
+  fill: #1859A9;
 }
 
 path.huffingtonpost{
   fill:  none;
-  stroke: green;
-  stroke-width: 1px;
+  stroke: #1859A9;
+  /*stroke-width: 1px;*/
 }
 
 circle.msnbc{
-  fill: yellow;
+  fill: #F37D22;
 }
 
 path.msnbc{
   fill:  none;
-  stroke: yellow;
-  stroke-width: 1px;
+  stroke: #F37D22;
+  /*stroke-width: 1px;*/
 }
 
 circle.yahoo{
-  fill: cyan;
+  fill: #B33893;
 }
 
 path.yahoo{
   fill: none;
-  stroke: cyan;
-  stroke-width: 1px;
+  stroke: #B33893;
+  /*stroke-width: 1px;*/
 }
 
 circle.cnnpolitics{
-  fill: orange;
+  fill: #662C91;
 }
 
 path.cnnpolitics{
   fill: none;
-  stroke: orange;
-  stroke-width: 1px;
+  stroke: #662C91;
+  /*stroke-width: 1px;*/
 }
 
 circle.theonion{
-  fill: black;
+  fill: #010101;
 }
 
 path.theonion{
   fill: none;
-  stroke: black;
-  stroke-width: 1px;
+  stroke: #010101;
+  /*stroke-width: 1px;*/
 }
 
 .hide{
   display: none;
   opacity: 0;
-  /*-webkit-transition: all 200ms ease-out;*/
 }
 
 .day:hover{
@@ -110,10 +112,6 @@ path.theonion{
   stroke-width: 2px;
   cursor: pointer;
   /*-webkit-transform: scale(1.5,1.5);*/
-}
-
-#calendars{
-  display: inline-block;
 }
 
 #headlines ol span{
@@ -127,10 +125,6 @@ path.theonion{
 .day {
   fill: #fff;
   stroke: #ccc;
-}
-#calendars{
-  height: 450px;
-  width: 500px;
 }
 .month {
   fill: none;
@@ -155,6 +149,26 @@ margin: 0 auto;
 .RdYlGn .q3-11{fill:rgb(253,174,97)}
 .RdYlGn .q4-11{fill:rgb(254,224,139)}
 .RdYlGn .q5-11{fill:rgb(255,255,191)}
+
+
+
+.cf:before,
+.cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.cf:after {
+    clear: both;
+}
+
+/**
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+.cf {
+    *zoom: 1;
+}
 .RdYlGn .q6-11{fill:rgb(217,239,139)}
 .RdYlGn .q7-11{fill:rgb(166,217,106)}
 .RdYlGn .q8-11{fill:rgb(102,189,99)}
