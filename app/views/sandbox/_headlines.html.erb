@@ -1,8 +1,13 @@
 <% if @headlines %>
-<h2><%= link_to("Check out the Homepage", @link) %></h2>
+<h2><%= link_to("#{@source_name} homepage on #{@date} ", @link) %></h2>
+<div id="modal-header" class="cf">
+  <span class="header">Headline:</span>
+  <span class="header">Sentiment Score:</span>
+</div>
 <ol>
   <%@headlines.each do |headline|  %>
     <li><%= headline[0]%> <span><%= headline[1].round(3) %></span></li>
 <% end %>
  </ol>
+
 <% end %>

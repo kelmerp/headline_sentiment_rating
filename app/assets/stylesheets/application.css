@@ -11,6 +11,9 @@
  *= require_self
  *= require_tree .
  */
+
+
+
  html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -39,7 +42,7 @@ footer, header, hgroup, menu, nav, section {
 body {
   line-height: 1;
 }
-ol, ul {
+ ul {
   list-style: none;
 }
 blockquote, q {
@@ -71,11 +74,12 @@ h2{
 
 
 p{
-  font-size: 2em;
+  font-size: 1em;
 }
 
 span{
-  font-size: 2em;
+  /*font-size: 2em;*/
+  list-style: decimal;
 }
 
 nav {
@@ -93,7 +97,7 @@ body {
 }
 
 #wrapper{
-  width: 85%;
+  width: 95%;
   margin: auto; 
   height: 100%;
   margin-bottom: 100px;
@@ -120,34 +124,199 @@ section{
   width: 10%;
   /*height: */
   border:1px black;
+  border-radius: 5px;
 }
 
  ul li{
   text-align: center;
-  padding: 1.5em;
-  font-size: 1.5em;
+  padding: 1em;
+  font-size: 1em;
   border-bottom: 1px dashed black;
 }
 
- ul li:hover{
+#scatterButtons li:hover{
   cursor: pointer;
-  background-color: whitesmoke;
 }
 
-#scatterplot{
+#scatterButtons li.cnn{
+  color: #ED2D2E;
+}
+
+#scatterButtons li.cnn.selected{
+  color: #eee;
+  background-color: #ED2D2E;
+}
+
+#scatterButtons li.cnnpolitics{
+  color: #662C91;
+}
+
+#scatterButtons li.cnnpolitics.selected{
+  color: #eee;
+  background-color: #662C91;
+}
+
+#scatterButtons li.foxnews{
+  color: #008C47;
+}
+
+#scatterButtons li.foxnews.selected{
+  color: #eee;
+  background-color: #008C47;
+}
+
+#scatterButtons li.msnbc{
+  color: #F37D22;
+}
+
+#scatterButtons li.msnbc.selected{
+  color: #eee;
+  background-color: #F37D22;
+}
+
+#scatterButtons li.huffingtonpost{
+  color: #1859A9;
+}
+
+#scatterButtons li.huffingtonpost.selected{
+  color: #eee;
+  background-color: #1859A9;
+}
+
+#scatterButtons li.yahoo{
+  color: #B33893;
+}
+
+#scatterButtons li.yahoo.selected{
+  color: #eee;
+  background-color: #B33893;
+}
+
+#scatterButtons li.theonion{
+  color: #010101;
+}
+
+#scatterButtons li.theonion.selected{
+  color: #eee;
+  background-color: #010101;
+}
+
+#scatter{
   /*float: right;*/
   margin-left: 10%;
   width: 90%;
   height: 46em;
   /*min-height: 300px;*/
-  background-color: #999;
+  background-color: #eee;
 }
 
-#calendar{
+#calendar-area{
+  width: 790px;
+  position: relative;
+  margin: 5em auto;
+}
+
+#calendarWrapper{
+  width: 87%;
   float: left;
+  position: relative;
+  height: 650px;
+  text-align: center;
+}
+
+#calendarWrapperButtons{
+
+}
+
+#calendarWrapper #months{
+  float: left;
+  position: absolute;
+  top:64px;
+  z-index: 1;
+  font-weight: 600;
+}
+
+#calendarWrapper #months li{
+  border: none;
+  margin-bottom: 1.2em;
+  top: 64px;
+}
+
+#calendars{
+  /*float: left;*/
+  /*background-color: #999;*/
+  top: -10px;
+  text-align: center;
+  height: 65em;
+  width: 570px;
+  -webkit-transform:rotate(90deg);
+  position: absolute;
+  right: 74px;
+}
+
+#simplemodal-overlay{
   background-color: #999;
-  height: 70em;
-  width: 60%;
+  cursor: pointer;
+}
+
+#simplemodal-container{
+  background-color: #bbb;
+}
+
+#simplemodal-data{
+  padding: 1em 3em;
+}
+
+#simplemodal-data h2{
+
+}
+
+#simplemodal-data ol{
+  list-style: decimal;
+}
+
+#modal-header{
+  border-bottom: 1px solid black;
+}
+
+#modal-header span{
+  padding: .5em 0;
+}
+
+
+#modal-header span:first-child{
+  float: left;
+  font-weight: 600;
+}
+
+#simplemodal-data span:last-child{
+  float: right;
+  /*width: 50px;*/
+  font-weight: 600;
+}
+
+#simplemodal-data li{
+  padding: .5em;
+  margin-left: 1.6em;
+  border-bottom: 1px dashed black;
+  overflow-y: auto;
+}
+
+#simplemodal-data li span{
+  float: right;
+  /*font-size: 1em;*/
+}
+
+#simplemodal-container a.modalCloseImg {
+  background:url(x.png) no-repeat; /* adjust url as required */
+  width:25px;
+  height:29px;
+  display:inline;
+  z-index:3200;
+  position:absolute;
+  top:-15px;
+  right:-18px;
+  cursor:pointer;
 }
 
 #headlines{
@@ -158,46 +327,12 @@ section{
   background-color: whitesmoke;
 }
 
-.box {
-	padding: 10px;
-}
-
-.header {
-	margin: 0 0;
-	background: #736D6A;
-	color: white;
-	font-size: 20px;
-	text-align: center;
-	height: 45px;
-	padding: 10px;
-}
-
-.about {
-	text-align: center;
-	width: 45%;
-	margin: 15px auto 0;
-	padding: 25px 5px;
-	background: #CCC4C1;
-  opacity: 0.9;
-}
-
-.about .splash-head {
-  font-size: 300%;
-  margin: 0px 0;
-  line-height: 25px;
-}
-
-.about .splash-subhead {
-  color: ;
-  font-weight: 300;
-  line-height: 20px;
-}
 
 /*Graph*/
 
 .content-graph {
   margin-top: 10px;
-  width: 100%;	
+  width: 100%;
   height: 500px;
   background-color: red;
   width: 100%;
@@ -225,142 +360,6 @@ section{
   background-color: blue;
 }
 
-.cnn {
-  height: 40px;
-  width: 200px;
-  background-color: green;
-  margin-top: -440px
-}
-
-.cnn-politics {
-  height: 40px;
-  width: 200px;
-  background-color: green;
-  margin-top: 10px
-}
-
-.fox {
-  height: 40px;
-  width: 200px;
-  background-color: green;
-  margin-top: 10px
-}
-
-.msnbc {
-  height: 40px;
-  width: 200px;
-  background-color: green;
-  margin-top: 10px
-}
-
-.huffpost {
-  height: 40px;
-  width: 200px;
-  background-color: green;
-  margin-top: 10px
-}
-
-.yahoo {
-  height: 40px;
-  width: 200px;
-  background-color: green;
-  margin-top: 10px
-}
-
-.onion {
-  height: 40px;
-  width: 200px;
-  background-color: green;
-  margin-top: 10px
-}
-
-/*Calendar*/
-
-.content-cal {
-  margin-top: 10px;
-  width: 100%;	
-  height: 900px;
-  background-color: red;
-}
-
-
-.svg-cal {
-  width: 70%;
-  height: 900px;
-  margin-left: 290px;
-  margin-top: 5px;
-  padding-top: 10px;
-  background-color: yellow;
-}
-
-.buttons-cal {
-  margin-top: -990px;
-  margin-left: 8px;
-  height: 450px;
-  width: 200px;
-  background-color: blue;
-/*  margin-top: -440px*/
-}
-
-.cnn-cal {
-  height: 40px;
-  width: 200px;
-  background-color: green;
-  margin-top: 100px
-}
-
-.cnn-politics-cal {
-  height: 40px;
-  width: 200px;
-  background-color: green;
-  margin-top: 10px
-}
-
-.fox-cal {
-  height: 40px;
-  width: 200px;
-  background-color: green;
-  margin-top: 10px
-}
-
-.msnbc-cal {
-  height: 40px;
-  width: 200px;
-  background-color: green;
-  margin-top: 10px
-}
-
-.huffpost-cal {
-  height: 40px;
-  width: 200px;
-  background-color: green;
-  margin-top: 10px
-}
-
-.yahoo-cal {
-  height: 40px;
-  width: 200px;
-  background-color: green;
-  margin-top: 10px
-}
-
-.onion-cal {
-  height: 40px;
-  width: 200px;
-  background-color: green;
-  margin-top: 10px
-}
-
-/*.ribbon {*/
-/*	background: #eee;
-	text-align: center;
-	padding: 32px;
-	color: #999;
-	width: 100%;
-	position: fixed; 
-	top: 950px;
-}*/
-
 .footer {
 	background: #111;
 	color: white;
@@ -372,22 +371,4 @@ section{
 	bottom: 0px;
 	box-shadow: 0px 1px 25px #5E5E5E;
 	background-color:#9A8E8A;
-}
-
-.cf:before,
-.cf:after {
-    content: " "; /* 1 */
-    display: table; /* 2 */
-}
-
-.cf:after {
-    clear: both;
-}
-
-/**
- * For IE 6/7 only
- * Include this rule to trigger hasLayout and contain floats.
- */
-.cf {
-    *zoom: 1;
 }
