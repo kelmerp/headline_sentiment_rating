@@ -12,7 +12,7 @@ class SourcesController < ApplicationController
     # grab_average('http://www.foxnews.com')
     source_array = []
     # num_of_sources = Sources.all
-    Source.all.each do |source|
+    Source.all.find_each do |source|
       source_array << grab_average(source.name)
     end
 
@@ -23,10 +23,10 @@ class SourcesController < ApplicationController
     dates = []
     json_object = []
 
-    source = Source.find_by(name: 'cnn')
-    dates = source.headlines.pluck(:date).uniq!
+    source = Source.find_by(name: 'cbsnews')
+    dates = source.headlines.order(:date).pluck(:date).uniq
     # source.headlines.each {|d| dates << d.date.strftime("%Y-%m-%d")}
-    dates.sort.each do |date|
+    dates.each do |date|
       object = {date: date.strftime("%Y-%m-%d"), score: source.headlines.get_average(date).to_f }
       json_object << object
     end
