@@ -19,6 +19,26 @@ class SourcesController < ApplicationController
     render json: source_array.flatten.to_json
   end
 
+  def headlines
+    @headlines = {}
+    source = Source.find_by(name: params["param2"])
+    headline_records = source.headlines.date(params["param1"])
+    # @headlines.order(@headlines.date.to_i)
+    headline_records.each do |headline|
+      @headlines[headline.content] = headline.sentiment_data.first.sentiment_score
+    end
+    p "HERES YOUR HASH"
+    # p @headlines
+    @headlines = @headlines.sort_by{|k, v| v }
+    p @link = headline_records.first.archive_url
+    html = render_to_string(:partial => 'sandbox/headlines', :layout => false,
+                     :locals => {headlines: @headlines, link: headline_records.first.archive_url})
+
+    # ÷render headlines: @headlines
+
+    render json: {html: html}
+  end
+
   def cnn_calendar
     dates = []
     json_object = []

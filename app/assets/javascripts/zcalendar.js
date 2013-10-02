@@ -41,6 +41,13 @@ Calendar.prototype.drawCalendar = function(data){
       .attr("height", cellSize)
       .attr("x", function(d) { return week(d) * cellSize; })
       .attr("y", function(d) { return day(d) * cellSize; })
+      .on("click", function (d) {
+        grabHeadlines(d);
+
+
+      })
+      // .on("click", grabHeadlines(d))
+
       .datum(format);
 
   rect.append("title")
@@ -83,7 +90,38 @@ Calendar.prototype.drawCalendar = function(data){
 }
 
 
+function grabHeadlines (date) {
 
+  var source = $('#calendarButtons .visible').attr('class').split(' ')[0];
+  console.log(source);
+
+  $.ajax({
+    url: '/headlines',
+    type: 'Post',
+    data: {param1: date, param2: source},
+  })
+  .done(function(response) {
+    console.log("success");
+    console.log(response);
+    var headlines = response;
+
+
+
+    $("#headlines").append(headlines.html);
+
+  })
+  .fail(function() {
+    console.log("error");
+  })
+  .always(function() {
+    console.log("complete");
+  });
+  
+
+
+
+
+}
 
 
   //   d3.select(self.frameElement).style("height", "2910px");

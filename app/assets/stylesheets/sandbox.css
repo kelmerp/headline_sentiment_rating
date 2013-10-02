@@ -1,7 +1,10 @@
 body {
   font: 10px sans-serif;
 }
-
+#scatter{
+  width: 800px;
+  height: 450px;
+}
 .axis path,
 .axis line {
   fill: none;
@@ -20,7 +23,7 @@ body {
 }
 
 circle{
-  opacity: .9;
+  opacity: .4;
 }
 
 circle.cnn{
@@ -86,15 +89,36 @@ path.cnnpolitics{
   stroke-width: 1px;
 }
 
+circle.theonion{
+  fill: black;
+}
+
+path.theonion{
+  fill: none;
+  stroke: black;
+  stroke-width: 1px;
+}
+
 .hide{
   display: none;
   opacity: 0;
   /*-webkit-transition: all 200ms ease-out;*/
 }
 
+.day:hover{
+  stroke: black;
+  stroke-width: 2px;
+  cursor: pointer;
+  /*-webkit-transform: scale(1.5,1.5);*/
+}
 
+#calendars{
+  display: inline-block;
+}
 
-
+#headlines ol span{
+  float: right;
+}
  body {
   font: 10px sans-serif;
   shape-rendering: crispEdges;
@@ -112,6 +136,12 @@ path.cnnpolitics{
   fill: none;
   stroke: #000;
   stroke-width: 2px;
+}
+
+img{
+  display: inline-block;
+  /*width: 500px;
+  height: 100px;*/
 }
 
 .RdYlGn .q0-11{fill:rgb(165,0,38)}
