@@ -1,5 +1,20 @@
 body {
   font: 10px sans-serif;
+  /*background-color: rgba(129,138,138,1);*/*/
+  background: url('/greyzz.png');
+}
+h1, h2, h3, h4, p{
+  font-family: 'Libre Baskerville', serif;
+}
+h3 {
+  font-size: 15px;
+  padding: 7px 0;
+  border-bottom: 1px solid #DFD9D9;
+  background: #F8F8F8;
+}
+
+p{
+  font-size: 1.55em;
 }
 .axis path,
 .axis line {
@@ -13,13 +28,8 @@ body {
 }
 
 .axis text{
-  font-size: 1em;
-}
-
-.line {
-  fill: none;
-  stroke: steelblue;
-  stroke-width: 3px;
+  font-size: 1.25em;
+  font-weight: 500;
 }
 
 path{
@@ -30,75 +40,84 @@ circle{
   opacity: .35;
 }
 
+circle.aggregate{
+  fill: #191919;
+}
+
+path.aggregate{
+  fill:none;
+  stroke: #191919;
+}
+
 circle.cnn{
-  fill: #ED2D2E;
+  fill: #F1595F;
   /*opacity:.4;*/
 }
 
 path.cnn {
   fill:  none;
-  stroke: #ED2D2E;
+  stroke: #F1595F;
   /*stroke-width: 1px;*/
 }
 
 circle.foxnews{
-  fill: #008C47;
+  fill: #79C36A;
 
 }
 
 path.foxnews{
   fill:  none;
-  stroke: #008C47;
+  stroke: #79C36A;
   /*stroke-width: 1px;*/
 }
 
 circle.huffingtonpost{
-  fill: #1859A9;
+  fill: #599AD3;
 }
 
 path.huffingtonpost{
   fill:  none;
-  stroke: #1859A9;
+  stroke: #599AD3;
   /*stroke-width: 1px;*/
 }
 
 circle.msnbc{
-  fill: #F37D22;
+  fill: #F9A65A;
 }
 
 path.msnbc{
   fill:  none;
-  stroke: #F37D22;
+  stroke: #F9A65A;
   /*stroke-width: 1px;*/
 }
 
 circle.yahoo{
-  fill: #B33893;
+  fill: #9E66AB;
 }
 
 path.yahoo{
   fill: none;
-  stroke: #B33893;
+  stroke: #9E66AB;
   /*stroke-width: 1px;*/
 }
 
 circle.cnnpolitics{
-  fill: #662C91;
+  fill: #CD7058;
 }
 
 path.cnnpolitics{
   fill: none;
-  stroke: #662C91;
+  stroke: #CD7058;
   /*stroke-width: 1px;*/
 }
 
 circle.theonion{
-  fill: #010101;
+  fill: #D77FB3;
 }
 
 path.theonion{
   fill: none;
-  stroke: #010101;
+  stroke: #D77FB3;
   /*stroke-width: 1px;*/
 }
 
@@ -117,10 +136,360 @@ path.theonion{
 #headlines ol span{
   float: right;
 }
- body {
-  font: 10px sans-serif;
-  shape-rendering: crispEdges;
+
+#wrapper{
+  width: 95%;
+  margin: auto; 
+  height: 100%;
+  margin-bottom: 100px;
 }
+
+#hero{
+  padding: 2em;
+  /*margin-top: 2em;*/
+  width: 70%;
+  margin: 2em auto;
+  /*background-color: rgba(232,237,237,1);*/
+  border-radius: 5px;
+}
+
+#hero {
+  padding: 2em;
+  margin: 2em auto;
+  border-radius: 5px;
+  color: #534E4E;
+  width: 60%;
+}
+section{
+  min-width: 790px;
+  border-radius: 5px;
+  margin-top: 5em;
+  width: 90%;
+  background-color: rgba(232,237,237,1);
+  margin: auto;
+}
+
+ ul{
+  float: left;
+  width: 10%;
+  /*height: */
+  border:1px black;
+  border-radius: 5px;
+}
+
+ ul li{
+  text-align: center;
+  padding: 1em;
+  font-size: 1.25em;
+  /*border-bottom: 1px dashed black;*/
+}
+
+#scatterButtons {
+  width: 100%;
+  float: none;
+  background: #F8F8F8;
+  padding-left: 24px;
+  border-top: 1px solid #D5D5D5;
+  border-radius: 0px;
+}
+
+#scatterButtons li{
+  float: left;
+  margin: 1em;
+}
+
+li{
+  box-sizing: border-box;
+  height: 4em;
+  border: 2px dashed;
+  margin: .5em .15em;
+}
+
+#scatterButtons li:hover{
+  cursor: pointer;
+}
+
+
+
+#scatterButtons li.selected, li.visible{
+  border: 4px solid;
+  /*font-weight: 600;*/
+  /*background-color: */
+}
+
+#scatterButtons li.cnn{
+  color: #F1595F;
+
+}
+
+#scatterButtons li.aggregate{
+  color: #191919;
+  border-color: #191919;
+}
+
+#scatterButtons li.cnn.selected{
+  /*color: #eee;*/
+  border-color: #F1595F;
+}
+
+#scatterButtons li.cnnpolitics{
+  color: #CD7058;
+}
+
+#scatterButtons li.cnnpolitics.selected{
+  color: ;
+  border-color: #CD7058;
+}
+
+#scatterButtons li.foxnews{
+  color: #79C36A;
+}
+
+#scatterButtons li.foxnews.selected{
+  color: ;
+  border-color: #79C36A;
+}
+
+#scatterButtons li.msnbc{
+  color: #F9A65A;
+}
+
+#scatterButtons li.msnbc.selected{
+  color: ;
+  border-color: #F9A65A;
+}
+
+#scatterButtons li.huffingtonpost{
+  color: #599AD3;
+}
+
+#scatterButtons li.huffingtonpost.selected{
+  color: ;
+  border-color: #599AD3;
+}
+
+#scatterButtons li.yahoo{
+  color: #9E66AB;
+}
+
+#scatterButtons li.yahoo.selected{
+  color: ;
+  border-color: #9E66AB;
+}
+
+#scatterButtons li.theonion{
+  color: #D77FB3;
+}
+
+#scatterButtons li.theonion.selected{
+  color: ;
+  border-color: #D77FB3;
+}
+
+#scatter{
+  /*float: right;*/
+  /*margin-left: 10%;*/
+  width: 100%;
+  height: 55em;
+  /*min-height: 300px;*/
+  /*background-color: #eee;*/
+  background-color: #F5F5F5;
+}
+
+#calendar-area{
+  width: 990px;
+  position: relative;
+  margin: 5em auto;
+  padding: 30px;
+  background-color: #F5F5F5;
+}
+
+#calendarWrapper{
+  width: 87%;
+  float: left;
+  position: relative;
+  height: 925px;
+  text-align: center;
+  margin-left: 12%;
+
+}
+
+#calendarWrapper h2 {
+  display: inline-block;
+  margin: 0 auto;
+  padding: 0;
+  width: 500px;
+  border-bottom: 1px solid #D6D1D1;
+  color: #353232;
+}
+
+
+#calendarButtons {
+  float: none;
+  position: absolute;
+  width: 15%;
+  top: 9em;
+  background: #F8F8F8;
+  padding: 9px;
+  border: 1px solid #DBD7D7;
+}
+#calendarButtons li{
+  cursor: pointer;
+}
+
+#calendarWrapper #months{
+  float: left;
+  position: absolute;
+  top:64px;
+  z-index: 1;
+  font-weight: 600;
+  width: 15%;
+  font-size: 1.2em;
+}
+
+#calendarWrapper #months li{
+  border: none;
+  margin: 5px;
+  padding-right: 0px;
+  /*top: 64px;*/
+}
+
+#calendars{
+  /*float: left;*/
+  /*background-color: #999;*/
+  top: 130px;
+  text-align: center;
+  height: 65em;
+  width: 970px;
+  -webkit-transform:rotate(90deg);
+  position: absolute;
+  /*right: 74px;*/
+}
+
+#simplemodal-overlay{
+  background-color: #999;
+  cursor: pointer;
+}
+
+#simplemodal-container{
+  background-color: #bbb;
+}
+
+#simplemodal-data{
+  padding: 1em 3em;
+  background: #F7F8FC;
+}
+
+#simplemodal-data h2 a{
+  font-family: 'Libre Baskerville', serif;
+  color: #534E4E;
+  text-transform:capitalize;
+}
+
+#simplemodal-data ol{
+  list-style: decimal;
+  font-size: 12px;
+}
+
+#modal-header{
+  border-bottom: 1px solid black;
+}
+
+#modal-header span{
+  padding: .5em 0;
+}
+
+
+#modal-header span:first-child{
+  float: left;
+  font-weight: 600;
+}
+
+#simplemodal-data span:last-child{
+  float: right;
+  /*width: 50px;*/
+  font-weight: 600;
+}
+
+#simplemodal-data li{
+  padding: .5em;
+  margin-left: 1.6em;
+  border: none;
+  border-bottom: 1px dashed black;
+}
+
+#simplemodal-data li span{
+  float: right;
+  /*font-size: 1em;*/
+}
+
+#simplemodal-container a.modalCloseImg {
+  background:url(x.png) no-repeat; /* adjust url as required */
+  width:25px;
+  height:29px;
+  display:inline;
+  z-index:3200;
+  position:absolute;
+  top:-15px;
+  right:-18px;
+  cursor:pointer;
+}
+
+#headlines{
+  /*display: inline-block;*/
+  text-align: center;
+  float: right;
+  width: 30%;
+  background-color: whitesmoke;
+}
+
+
+/*Graph*/
+
+.content-graph {
+  margin-top: 10px;
+  width: 100%;
+  height: 500px;
+  background-color: red;
+  width: 100%;
+}
+
+.data_visual{
+  width: 80%;
+  margin: auto;
+}
+
+
+.svg-graph {
+  width: 70%;
+  height: 450px;
+  /*margin-left: 290px;*/
+  /*margin-top: 5px;*/
+  /*padding-top: 10px;*/
+  background-color: yellow;
+}
+
+.buttons-graph {
+  /*margin-left: 8px;*/
+  height: 450px;
+  width: 25%;
+  background-color: blue;
+}
+
+.footer {
+  background: #111;
+  color: white;
+  text-align: center;
+  padding: 5px;
+  font-size: 80%;
+  width: 100%;
+  position: relative;
+  bottom: 0px;
+  box-shadow: 0px 1px 25px #5E5E5E;
+  background-color:#9A8E8A;
+}
+
+
 
 .day {
   fill: #fff;
@@ -142,6 +511,7 @@ display: block;
 width: 850px;
 margin: 0 auto;
 }
+
 
 .RdYlGn .q0-11{fill:rgb(165,0,38)}
 .RdYlGn .q1-11{fill:rgb(215,48,39)}
@@ -174,3 +544,41 @@ margin: 0 auto;
 .RdYlGn .q8-11{fill:rgb(102,189,99)}
 .RdYlGn .q9-11{fill:rgb(26,152,80)}
 .RdYlGn .q10-11{fill:rgb(0,104,55)}
+
+.cf {
+box-shadow: 2px 3px 9px #7E7373;
+border-radius: 7px;
+}
+
+#calendarWrapper.cf, #simplemodal-data .cf {
+  box-shadow: none;
+}
+#simplemodal-data .cf{
+  border-radius: 0;
+}
+#legend {
+position: absolute;
+bottom: 77px;
+left: -111px;
+width: 147px;
+height: 229px;
+background: #F8F8F8;
+border: 1px solid #DBD7D7;
+border-radius: 5px;
+}
+
+#something {
+  background: -webkit-linear-gradient(top, rgb(165,0,38), rgb(215,48,39),rgb(244,109,67),rgb(253,174,97),rgb(254,224,139),rgb(217,239,139),rgb(166,217,106),rgb(102,189,99),rgb(26,152,80),rgb(0,104,55));
+  height: 155px;
+  width: 21px;
+  margin-left: 11px;
+  margin-top: 20px;
+  bottom: 74px;
+}
+#something li{
+  margin-left: 32px;
+  border: none;
+  list-style: none;
+  margin-bottom: 22px;
+  font-size: 12px;
+}

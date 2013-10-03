@@ -7,8 +7,8 @@ Calendar.prototype.drawCalendar = function(data){
 // my_request.post(function(d){
   console.log('called');
   var width = $('#calendars').width(),
-      height = 96,
-      cellSize = 10; // cell size
+      height = 115,
+      cellSize = 15; // cell size
 
   var day = d3.time.format("%w"),
       week = d3.time.format("%U"),
@@ -31,6 +31,8 @@ Calendar.prototype.drawCalendar = function(data){
   svg.append("text")
       .attr("transform", "translate(-6," + cellSize * 3.5 + ")rotate(-90)")
       .style("text-anchor", "middle")
+      .style("font-size","1.5em")
+      .style("font-weight","bold")
       .text(function(d) { return d; });
 
   var rect = svg.selectAll(".day")
@@ -69,12 +71,6 @@ Calendar.prototype.drawCalendar = function(data){
             + "H" + (w1 + 1) * cellSize + "V" + 0
             + "H" + (w0 + 1) * cellSize + "Z";
       }
-
-// d3.csv("dji.csv", function(error, csv) {
-//   var data = d3.nest()
-//     .key(function(d) { return d.Date; })
-//     .rollup(function(d) { return (d[0].Close - d[0].Open) / d[0].Open; })
-//     .map(csv);
       var days = {};
       // console.log(data)
       data.forEach(function(d){

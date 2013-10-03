@@ -4,7 +4,7 @@ function BlankGraph () {
 
   w = $("#scatter").width();
   h = $("#scatter").height();
-  padding = 30;
+  padding = 15;
 
   svg = d3.select("#scatter")
               .append('svg')
@@ -15,7 +15,7 @@ function BlankGraph () {
 
 function Calendar (data,source) {
 
-  this.el = $('.'+source);
+  this.el = $('#calendarButtons .'+source);
   this.source = source;
   this.visible = false;
   this.button = $("#calendarButtons ."+source);
@@ -29,11 +29,11 @@ function Calendar (data,source) {
                     return day;
                   });
 
-
   this.data = calendarData
   // this.drawCalendar(this.data);
 
 this.button.on('click', function(event) {
+    // console.log(self.el)
     event.preventDefault();
     if (!self.el.hasClass('visible')){
       self.drawCalendar(self.data);
@@ -43,9 +43,8 @@ this.button.on('click', function(event) {
     }
   });
 
-    if (this.el.hasClass('visible')) {self.drawCalendar(self.data)};
-  // console.log(this.source);
-  // console.log(calendarData);
+  if (this.el.hasClass('visible')) {self.drawCalendar(self.data)};
+
 
 }
 
@@ -57,11 +56,12 @@ function grabSources (argument) {
       data.forEach(function(d){
         plotPoints.push([d.date, d.score, d.source])
       });
+
       $("#waiting").remove()
 
     xScale = d3.scale.linear()
         .domain([d3.min(plotPoints, function (d) { return d[0] }),d3.max(plotPoints, function(d) { return d[0]; })])
-        .range([padding,w-(padding/2)]);
+        .range([padding,w-padding-5]);
 
     yScale = d3.scale.linear()
         .domain([0.2,-0.2])
@@ -75,17 +75,24 @@ function grabSources (argument) {
         .y(function (d) {
           return yScale(d[1]);
         });
+      // new newSource(plotPoints, "aggregate");
+      var aggregate = $.extend(true, {}, plotPoints);
+       new newSource(aggregate, "aggregate");
 
-    sources = _.groupBy(plotPoints, function(d){return d[2]});
-
+      var aggregate = plotPoints;
+      sources = _.groupBy(plotPoints, function(d){return d[2]});
       _.each(sources,function(value,key,list){
         new newSource(value, key)});
-      });
+
+      graph.makeAxis();
+    });
+
+
 }
 
 
 function newSource(data, source) {
-
+  console.log(source);
 
   var self = this;
 
@@ -94,49 +101,58 @@ function newSource(data, source) {
   this.button = $('#scatterButtons .'+source);
   this.circleGroup = svg.append('svg:g');
   this.linePlot = svg.append('path');
-  this.visible = true;
-  console.log(source);
+  this.painted = false;
+  // console.log(source);
   this.calendar = new Calendar(data,source);
 
-  // d3.json("/scatter", function(error, data){
-  //     data.forEach(function(d){
-  //       self.plotPoints.push([d.date, d.score, d.source])
-  //     });
-  // // });
+        console.log(this.data);
 
-  // sources = _.groupBy(self.plotPoints, function(d){return d[2]});
-
-  this.makeCircles(this.data)
+  // this.makeCircles(this.data)
   var months = monthlyAverages(this.data);
-  this.makeLine(months, source);
-  graph.makeAxis()
+  // this.makeLine(months, source);
+
+  if (this.button.hasClass('selected')) {
+    this.makeCircles(this.data, this.source)
+    this.makeLine(months, source);
+    this.painted = true;
+  };
+
 
 
   this.button.on('click', function(event) {
     event.preventDefault();
     // console.log(self.circleGroup)
-    if (self.visible == true){
+    if (!self.button.hasClass('selected')){
+        if(self.painted == false){
+          self.makeCircles(self.data, self.source)
+          self.makeLine(months, source);
+        }
+        else{
+          self.circleGroup.transition()
+            .style('opacity',1);
+          self.linePlot.transition()
+            .style('opacity',1);
+        }
+          self.button.addClass('selected');
+          self.painted = true;
+    }
+    else{
+        // self.circleGroup.remove();
+        // self.linePlot.remove();
+
+        // self.circleGroup = svg.append('svg:g');
+        // self.linePlot = svg.append('path');
+
           self.circleGroup.transition()
               .style('opacity',0);
           self.linePlot.transition()
               .style('opacity',0);
 
           self.button.removeClass('selected');
-          self.visible = false;
-
-    }
-    else{
-          self.circleGroup.transition()
-              .style('opacity',1);
-          self.linePlot.transition()
-              .style('opacity',1);
-
-          self.button.addClass('selected');
-          self.visible = true;
+          // self.visible = true;
     }
   });
 }
-
 
 function oddIndexes (array) {
   var result = []
@@ -159,10 +175,6 @@ function monthlyAverages (points, source) {
     date.pop();
   })
 
-  // firstDate = _.last(points)[0];
-
-
-
   var months = _.groupBy(linePoints,function (day) {
                 return Math.floor(day[0]/2629740);
               });
@@ -170,12 +182,10 @@ function monthlyAverages (points, source) {
   _.map(months,function (month) {
 
     var midMonth = (month[0][0]+(2629740/2));
-
     flatMonth = oddIndexes(_.flatten(month));
 
     sum = _.reduce(flatMonth,function (memo,day) {
             return memo + day;
-
       });
     average = sum/month.length;
 
@@ -189,14 +199,14 @@ function monthlyAverages (points, source) {
 }
 
 
-newSource.prototype.makeCircles = function(points) {
-
+newSource.prototype.makeCircles = function(points, source) {
+  console.log(points);
   this.circleGroup.selectAll("circle")
            .data(points)
            .enter()
            .append("circle")
            .attr("date", function(d){return d[0]})
-           .attr('class', function(d){ return d[2]})
+           .attr('class', source)
 
           .attr("cx", function(d) {
                   return xScale(d[0]);
@@ -212,13 +222,22 @@ newSource.prototype.makeCircles = function(points) {
 };
 
 newSource.prototype.makeLine = function(months, source) {
-              this.linePlot
+
+    this.linePlot
       .attr('class', 'line')
       .attr('class', source)
       .attr('d',function (d) {
 
         return line(months);
       })
+  var totalLength = this.linePlot.node().getTotalLength();
+    this.linePlot
+      .attr("stroke-dasharray", totalLength + " " + totalLength)
+      .attr("stroke-dashoffset", totalLength)
+      .transition()
+        .duration(2000)
+        .ease("ease")
+        .attr("stroke-dashoffset", 0);
 };
 
 
@@ -229,28 +248,40 @@ BlankGraph.prototype.makeAxis = function() {
             var myDate = new Date( d * 1000);
             year = myDate.getUTCFullYear();
             month = myDate.getUTCMonth() + 1;
-            return month + "-" + year
+            // return month + "-" + year
+            return moment(myDate).format("MMM-YY");
           })
            .scale(xScale)
-           .orient("bottom")
-           // .ticks(30)
+           .orient("top")
+           .ticks(15)
 
       yAxis = d3.svg.axis()
+            .tickFormat(function(d){
+              if(d<0){return "More Negative"}
+              if(d>0){return "More Positive"}
+              // if(d==0){return }
+            })
             .scale(yScale)
-            .orient("left")
-            .ticks(6)
+            .orient("right")
+            .ticks(3)
+            // .selectAll("text")
+            //   .attr("font-size","5em")
+
+
 
 
       svg.append("g")
             .attr("class", "axis")
             .attr("transform", "translate("+(0)+"," + ((h/2)) + ")")
             // .attr("transform", "translate("+25+",0")
-            .call(xAxis);
+            .call(xAxis)
+
 
       svg.append("g")
           .attr("class", "axis")
           .attr("transform", "translate("+padding+",0)")
           .call(yAxis);
+
 };
 
 
@@ -265,5 +296,6 @@ $(document).ready(function() {
   graph = new BlankGraph()
 
   grabSources();
+
 });
 

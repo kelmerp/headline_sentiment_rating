@@ -9,7 +9,7 @@ open_black_list()
 # add_to_black_list(@black_list)
 
 # @url = 'http://news.bbc.co.uk'
-@url = "http://news.google.com/"
+@url = "http://nytimes.com"
 # Wayback.page(url, '20130820174405')
 # Commented out wayback calls because we stored results
 # In a seperate file
@@ -29,7 +29,7 @@ def write_csv(timestamp, one_scrape, headlines)
   archive_url = one_scrape.last[:uri]
 
   headlines.each do |headline|
-    CSV.open('google_news_headlines/headline.csv', "ab") do |csv|
+    CSV.open('nytimes_headlines/headline.csv', "ab") do |csv|
       csv << [@url, archive_url, timestamp, headline.gsub("\n"," ").strip]
     end
   end

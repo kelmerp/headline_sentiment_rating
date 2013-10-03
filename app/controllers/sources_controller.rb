@@ -12,17 +12,29 @@ class SourcesController < ApplicationController
     @headlines = {}
     @date = params["param1"]
     @source_name = params["param2"]
-    @source = Source.find_by(name: params["param2"])
-    headline_records = @source.headlines.date(params["param1"])
-    # @headlines.order(@headlines.date.to_i)
-    headline_records.find_each do |headline|
-      @headlines[headline.content] = headline.sentiment_data.first.sentiment_score
+    if @source_name == 'aggregate'
+      sources = Source.all
+
+      sources.each do |source|
+        headline_records = source.headlines.date(@date)
+
+        headline_records.each do |headline|
+          @headlines[headline.content] = headline.sentiment_data.first.sentiment_score
+        end
+      end
+    else
+      @source = Source.find_by(name: @source_name)
+      headline_records = @source.headlines.date(@date)
+      # @headlines.order(@headlines.date.to_i)
+      headline_records.each do |headline|
+        @headlines[headline.content] = headline.sentiment_data.first.sentiment_score
+      end
+    @link = headline_records.first.archive_url
     end
     # p @headlines
     @headlines = @headlines.sort_by{|k, v| v }
-    p @link = headline_records.first.archive_url
     html = render_to_string(:partial => 'sandbox/headlines', :layout => false,
-                     :locals => {headlines: @headlines, link: headline_records.first.archive_url})
+                     :locals => {headlines: @headlines, link: @link})
 
     render json: {html: html}
   end
