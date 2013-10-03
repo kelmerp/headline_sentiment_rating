@@ -8,7 +8,7 @@ For instance, is the sentiment ranking of news site A more positive than news si
 
 If you believe a news site has a certain bias, is that reflected in their sentiment rating?
 <br>
-## Gems used in this application: 
+## Gems used in this application:
 
 #### [Alchemy API](https://github.com/technekes/alchemy-api-rb)
 #### [Wayback Machine](https://github.com/XOlator/wayback_gem)
@@ -46,6 +46,3 @@ CSVs can be found in the lib directory headlines directories
 
 Run the scrape file to populate the database from the CSV
 The rake file also runs the article title through the Alchemy API to update the `sentiment_score` field in the database
-
----
-####Database snapshots can be found in `db/dumps/*`
