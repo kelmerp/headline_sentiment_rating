@@ -64,7 +64,7 @@ function grabSources (argument) {
         .range([padding,w-(padding/2)]);
 
     yScale = d3.scale.linear()
-        .domain([0.2,-0.2])
+        .domain([0.1,-0.1])
         .range([padding,h-padding]);
 
     line = d3.svg.line()
