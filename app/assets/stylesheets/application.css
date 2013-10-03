@@ -96,6 +96,12 @@ body {
   height: 100%;
 }
 
+.social_icons {
+  position: absolute;
+  margin-top: 2em;
+  margin-left: 0.5em;
+}
+
 #wrapper{
   width: 95%;
   margin: auto; 
