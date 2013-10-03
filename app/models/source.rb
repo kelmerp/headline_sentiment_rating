@@ -4,7 +4,7 @@ class Source < ActiveRecord::Base
   validates :url, presence: true, uniqueness: true
 
   def get_average_for_date(some_date, source_id)
-    Headline.get_average_cached(some_date, source_id)
+    self.headlines.get_average(some_date, source_id)
   end
 
   def get_average_for_date_cached(some_date, source_id)
