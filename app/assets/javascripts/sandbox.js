@@ -4,7 +4,7 @@ function BlankGraph () {
 
   w = $("#scatter").width();
   h = $("#scatter").height();
-  padding = 60;
+  padding = 30;
 
   svg = d3.select("#scatter")
               .append('svg')
@@ -36,7 +36,6 @@ function Calendar (data,source) {
 this.button.on('click', function(event) {
     event.preventDefault();
     if (!self.el.hasClass('visible')){
-      console.log("CALLLED")
       self.drawCalendar(self.data);
 
       $("#calendarButtons").children().removeClass('visible');
@@ -62,11 +61,11 @@ function grabSources (argument) {
 
     xScale = d3.scale.linear()
         .domain([d3.min(plotPoints, function (d) { return d[0] }),d3.max(plotPoints, function(d) { return d[0]; })])
-        .range([padding,w - padding]);
+        .range([padding,w-(padding/2)]);
 
     yScale = d3.scale.linear()
         .domain([0.2,-0.2])
-        .range([0,h]);
+        .range([padding,h-padding]);
 
     line = d3.svg.line()
         .interpolate("basis")
@@ -96,6 +95,7 @@ function newSource(data, source) {
   this.circleGroup = svg.append('svg:g');
   this.linePlot = svg.append('path');
   this.visible = true;
+  console.log(source);
   this.calendar = new Calendar(data,source);
 
   // d3.json("/scatter", function(error, data){
@@ -109,6 +109,7 @@ function newSource(data, source) {
   this.makeCircles(this.data)
   var months = monthlyAverages(this.data);
   this.makeLine(months, source);
+  graph.makeAxis()
 
 
   this.button.on('click', function(event) {
@@ -119,6 +120,8 @@ function newSource(data, source) {
               .style('opacity',0);
           self.linePlot.transition()
               .style('opacity',0);
+
+          self.button.removeClass('selected');
           self.visible = false;
 
     }
@@ -128,14 +131,11 @@ function newSource(data, source) {
           self.linePlot.transition()
               .style('opacity',1);
 
-      self.visible = true;
+          self.button.addClass('selected');
+          self.visible = true;
     }
-    });
-
-    graph.makeAxis()
-
-
-  };
+  });
+}
 
 
 function oddIndexes (array) {
@@ -238,17 +238,18 @@ BlankGraph.prototype.makeAxis = function() {
       yAxis = d3.svg.axis()
             .scale(yScale)
             .orient("left")
+            .ticks(6)
+
 
       svg.append("g")
             .attr("class", "axis")
-            .attr("transform", "translate(0," + ((h/2)) + ")")
-            // .attr("transform", "translate("+50+",0")
-
+            .attr("transform", "translate("+(0)+"," + ((h/2)) + ")")
+            // .attr("transform", "translate("+25+",0")
             .call(xAxis);
 
       svg.append("g")
           .attr("class", "axis")
-          .attr("transform", "translate("+50+",0)")
+          .attr("transform", "translate("+padding+",0)")
           .call(yAxis);
 };
 
