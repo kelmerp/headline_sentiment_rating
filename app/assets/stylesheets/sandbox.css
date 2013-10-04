@@ -316,7 +316,6 @@ li{
 }
 
 #scatterButtons li.cnnpolitics.selected{
-  color: ;
   border-color: #CD7058;
 }
 
@@ -325,7 +324,6 @@ li{
 }
 
 #scatterButtons li.foxnews.selected{
-  color: ;
   border-color: #79C36A;
 }
 
@@ -334,7 +332,6 @@ li{
 }
 
 #scatterButtons li.msnbc.selected{
-  color: ;
   border-color: #F9A65A;
 }
 
@@ -343,7 +340,6 @@ li{
 }
 
 #scatterButtons li.huffingtonpost.selected{
-  color: ;
   border-color: #599AD3;
 }
 
@@ -352,7 +348,6 @@ li{
 }
 
 #scatterButtons li.yahoo.selected{
-  color: ;
   border-color: #9E66AB;
 }
 
@@ -361,7 +356,6 @@ li{
 }
 
 #scatterButtons li.theonion.selected{
-  color: ;
   border-color: #D77FB3;
 }
 
