@@ -1,3 +1,84 @@
+ html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+* {
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+}
+
+h1{
+  font-size: 3em;
+}
+
+h2{
+  font-size: 2em;
+}
+
+
+p{
+  font-size: 1em;
+}
+
+span{
+  /*font-size: 2em;*/
+  list-style: decimal;
+}
+
+nav {
+  width: 100%;
+  background-color: rgba(232,237,237,1);
+  text-align: left;
+  padding: .5em;
+}
+
+body {
+  margin: 0 auto;
+  /*line-height: 27px;*/
+  width: 100%;
+  height: 100%;
+}
 body {
   font: 10px sans-serif;
   /*background-color: rgba(129,138,138,1);*/*/
@@ -145,6 +226,7 @@ path.theonion{
 }
 
 #hero{
+  text-align: center;
   padding: 2em;
   /*margin-top: 2em;*/
   width: 70%;
@@ -315,10 +397,12 @@ li{
 }
 
 #calendarWrapper h2 {
+  font-size: 2.5em;
+  font-weight: 600;
   display: inline-block;
   margin: 0 auto;
   padding: 0;
-  width: 500px;
+  /*width: 500px;*/
   border-bottom: 1px solid #D6D1D1;
   color: #353232;
 }
@@ -343,8 +427,9 @@ li{
   top:64px;
   z-index: 1;
   font-weight: 600;
-  width: 15%;
+  width: 10%;
   font-size: 1.2em;
+  left: 25px;
 }
 
 #calendarWrapper #months li{
