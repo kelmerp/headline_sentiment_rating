@@ -9,7 +9,7 @@ function BlankGraph () {
   svg = d3.select("#scatter")
               .append('svg')
               .attr("width", w)
-              .attr("height", h)
+              .attr("height", h);
 
 }
 
@@ -267,9 +267,6 @@ BlankGraph.prototype.makeAxis = function() {
             // .selectAll("text")
             //   .attr("font-size","5em")
 
-
-
-
       svg.append("g")
             .attr("class", "axis")
             .attr("transform", "translate("+(0)+"," + ((h/2)) + ")")
@@ -293,7 +290,7 @@ BlankGraph.prototype.makeAxis = function() {
 $(document).ready(function() {
   $("#waiting").prepend("<h2>Loading...</h2><img alt='Slipnslide' src='/assets/deal_with_it.gif'>")
   // Calendar();
-  graph = new BlankGraph()
+  graph = new BlankGraph();
 
   grabSources();
 

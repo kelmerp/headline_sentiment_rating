@@ -1,8 +1,8 @@
 class Headline < ActiveRecord::Base
   has_many :sentiment_data, :dependent => :destroy
   belongs_to :source
-  validates :content, length: { in: 15..255 },
-            uniqueness: true
+  validates :content, length: { in: 15..255 }
+            # uniqueness: true
   validates :date, presence: true
   validates :archive_url, presence: true
 

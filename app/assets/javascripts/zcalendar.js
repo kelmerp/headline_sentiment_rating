@@ -89,7 +89,8 @@ Calendar.prototype.drawCalendar = function(data){
 function grabHeadlines (date) {
 
   var source = $('#calendarButtons .visible').attr('class').split(' ')[0];
-  console.log(source);
+  
+  $("html,body").css("overflow","hidden");
 
   $.ajax({
     url: '/headlines',
@@ -97,13 +98,15 @@ function grabHeadlines (date) {
     data: {param1: date, param2: source},
   })
   .done(function(response) {
-    console.log("success");
-    console.log(response);
     var headlines = response;
 
     $.modal(headlines.html, {
       appendTo: "#wrapper",
-      minWidth: 500
+      minWidth: 500,
+      onClose: function(){
+        $("html,body").css("overflow","auto");
+        $.modal.close();
+      }
     });
 
   })
@@ -119,15 +122,7 @@ function grabHeadlines (date) {
     $.modal.close();
   });
 
-
 }
-
-
-  //   d3.select(self.frameElement).style("height", "2910px");
-  // });
-
-
- // });
 
 
 

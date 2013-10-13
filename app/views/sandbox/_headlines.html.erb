@@ -1,5 +1,7 @@
 <% if @headlines %>
-<h2><%= link_to("#{@source_name} homepage on #{@date} ", @link) %></h2>
+	<%if @link != "" %>
+	<h2><%= link_to("#{@source_name} homepage on #{@date} ", @link) %></h2>
+	<% end %>
 <div id="modal-header" class="cf">
   <span class="header">Headline:</span>
   <span class="header">Sentiment Score:</span>

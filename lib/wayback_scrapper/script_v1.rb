@@ -6,22 +6,23 @@ require_relative "hash.rb"
 require_relative "noko_it_up.rb"
 
 open_black_list()
-# add_to_black_list(@black_list)
 
-# @url = 'http://news.bbc.co.uk'
+
+
+#####################
+# THIS IS WHERE YOU PUT THE URL YOU WANT TO SCRAPE
 @url = "http://nytimes.com"
-# Wayback.page(url, '20130820174405')
-# Commented out wayback calls because we stored results
-# In a seperate file
-# hash = Wayback.list('http://www.cnn.com')
-list = Wayback.list(@url)
+#######################
+
+# This grabs all the urls wayback machine has for the url
+p list = Wayback.list(@url)
+
+# This creates an array from the parse list
 list_array = list.attrs[:dates].to_a.reverse
-# hash = Wayback.list('http://www.msnbc.com')
 
-# Find dates of list_array and put them in reverse order
-# list_array = wayback[:dates].to_a.reverse
 
-i = 0
+#This is the counter being set for how many days you want to attemp to scrape
+i = 1400
 
 
 
@@ -43,10 +44,10 @@ new_hash = list_array.group_by{ |k,v| k.to_s[0,8] }
 #iterates through list and grabs one homepage per day
 new_hash.to_a.each do |internal_array|
 
-  return false if i >= 1400
-  i += 1
+  return false if i == 0
+  i -= 1
 
-  p i
+  p "#{i} days remaining to attempt to scrape"
   # p internal_array
   p internal_array.last.first.last[:datetime]
   scrapes_in_one_day ||= internal_array.last
@@ -65,9 +66,11 @@ new_hash.to_a.each do |internal_array|
     one_scrape = scrapes_in_one_day.shift
     retry
   end
+
+  #comment out this line if you want to test the scrapper without writing to a csv
   write_csv(timestamp, one_scrape, headlines)
 
-  sleep 1
+  sleep 0.5
 end
 
 # open_black_list()
