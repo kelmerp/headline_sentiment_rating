@@ -438,6 +438,8 @@ li{
   height: 65em;
   width: 970px;
   -webkit-transform:rotate(90deg);
+  -moz-transform:rotate(90deg);
+  transform:rotate(90deg);
   position: absolute;
   /*right: 74px;*/
 }
@@ -646,6 +648,7 @@ border-radius: 5px;
 
 #something {
   background: -webkit-linear-gradient(top, rgb(165,0,38), rgb(215,48,39),rgb(244,109,67),rgb(253,174,97),rgb(254,224,139),rgb(217,239,139),rgb(166,217,106),rgb(102,189,99),rgb(26,152,80),rgb(0,104,55));
+  background: -moz-linear-gradient(top, rgb(165,0,38), rgb(215,48,39),rgb(244,109,67),rgb(253,174,97),rgb(254,224,139),rgb(217,239,139),rgb(166,217,106),rgb(102,189,99),rgb(26,152,80),rgb(0,104,55));
   height: 155px;
   width: 21px;
   margin-left: 11px;
