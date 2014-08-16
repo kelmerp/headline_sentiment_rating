@@ -71,7 +71,7 @@ Feel free to fork away!
 
 ##The Team:
 
-#####[Luiz](https://github.com/Luiz-N) - Vision, script and visualizations
+#####[Luiz](https://github.com/Luiz-N) - Script and visualizations
 #####[Corey s](https://github.com/Cspeisman) - Script and visualizations
 #####[Kelmer](https://github.com/kelmerp) - Database seeding, migrating and optimization (memcahce)
 #####[Corey W](https://github.com/corywest) - Database seeding and front-end framework.
